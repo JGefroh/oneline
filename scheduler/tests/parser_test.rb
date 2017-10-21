@@ -16,16 +16,24 @@ module Scheduler
     end
 
 
-    def test_parse_1
-      data = @@parser.parse("Go to the store at 12pm on Friday.")
+    def test_parse_time
+      data = @@parser.parse("Go to the store at 12pm")
       assert_equal("12pm", data[:time])
-      assert_equal("Friday", data[:day])
     end
 
-    def test_parse_2
-      data = @@parser.parse("Eat a potato at 3:00pm on thu.")
-      assert_equal("3:00pm", data[:time])
+    def test_parse_day
+      data = @@parser.parse("Eat a potato thu.")
       assert_equal("thu", data[:day])
+    end
+
+    def test_parse_date
+      data = @@parser.parse("Go to the zoo 3/13")
+      assert_equal("3/13", data[:date])
+    end
+
+    def test_parse_relative_day
+      data = @@parser.parse("Eat a potato tomorrow")
+      assert_equal("tomorrow", data[:relative_day])
     end
 
 
@@ -150,7 +158,7 @@ module Scheduler
     def test_date_longhand
       assert_equal('02/14/2014', @@parser.identify_date("02/14/2014"))
     end
-    
+
 
     def test_relative_day_today
       assert_equal('today', @@parser.identify_relative_day('play frolf today'))
