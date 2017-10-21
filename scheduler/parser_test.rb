@@ -67,5 +67,33 @@ module Scheduler
     def test_time_longhand_double_digit_with_colon_pm
       assert_equal('12:20pm', @@parser.identify_time("12:20pm"))
     end
+
+
+
+    def test_time_with_label_shorthand_double_digit_pm
+      assert_equal('12pm', @@parser.identify_time("meet caroline at 12pm"))
+    end
+
+    def test_time_with_label_shorthand_double_digit_am
+      assert_equal('12am', @@parser.identify_time("meet caroline at 12am"))
+    end
+
+
+    def test_time_with_label_longhand_double_digit_no_colon_pm
+      assert_equal('1220pm', @@parser.identify_time("call chris at 1220pm"))
+    end
+
+    def test_time_with_label_longhand_double_digit_no_colon_am
+      assert_equal('1220am', @@parser.identify_time("call chris at 1220am"))
+    end
+
+
+    def test_time_with_label_longhand_double_digit_with_colon_am
+      assert_equal('12:20am', @@parser.identify_time("eat dinner at 12:20am"))
+    end
+
+    def test_time_with_label_longhand_double_digit_with_colon_pm
+      assert_equal('12:20pm', @@parser.identify_time("eat dinner at 12:20pm"))
+    end
   end
 end
