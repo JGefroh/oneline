@@ -137,5 +137,17 @@ module Scheduler
     def test_day_sunday
       assert_equal('sunday', @@parser.identify_day("relax on sunday"))
     end
+
+    def test_date_shorthand
+      assert_equal('1/24', @@parser.identify_date("1/24"))
+    end
+
+    def test_date_shorthand_leading_zero
+      assert_equal('03/03', @@parser.identify_date("03/03"))
+    end
+
+    def test_date_longhand
+      assert_equal('02/14/2014', @@parser.identify_date("02/14/2014"))
+    end
   end
 end
