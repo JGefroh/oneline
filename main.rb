@@ -1,5 +1,15 @@
 require_relative 'scheduler/processor'
 
-
+tasks = []
 processor = Scheduler::Processor.new
-puts processor.process('Get coffee at 3pm friday')
+
+input = nil
+
+while input != 'exit'
+  input = gets
+  task = processor.process(input)
+  if task[:interpreted]
+    tasks << task
+    puts tasks
+  end
+end

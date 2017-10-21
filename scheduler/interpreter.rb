@@ -10,8 +10,9 @@ module Scheduler
     private def to_data(parsed_text)
       interpreted_data = {}
       interpreted_data[:date] = set_date_from_day(parsed_text[:day]) if parsed_text[:day]
-      interpreted_data[:date] = set_date_from_day(parsed_text[:date]) if parsed_text[:date]
+      interpreted_data[:date] = set_date_from_date(parsed_text[:date]) if parsed_text[:date]
       interpreted_data[:time] = set_time_from_time(parsed_text[:time]) if parsed_text[:time]
+      interpreted_data[:interpreted] = true unless interpreted_data.empty?
       return interpreted_data
     end
 
@@ -22,7 +23,8 @@ module Scheduler
     end
 
     def set_date_from_date(parsed_date)
-      return Date.parse(parsed_day)
+      return Date.parse(parsed_date) if parsed_date.length < 6
+      return Date.strptime(parsed_date, "%m/%d/%Y") if parsed_date.length >= 6
     end
 
     def set_time_from_time(parsed_time)

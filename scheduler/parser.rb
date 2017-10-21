@@ -10,6 +10,7 @@ module Scheduler
       last_operator_index = text.index(' on ') || text.index(' at ') || text.index(' in ')
       data[:time] = identify_time(text)
       data[:day] = identify_day(text)
+      data[:date] = identify_date(text)
       return data
     end
 
@@ -24,7 +25,7 @@ module Scheduler
     end
 
     def identify_date(text)
-      matches = text.scan(/(jan|feb|mar|apr|may|june|july|aug|sep|oct|nov|dec)(\s[0-9]{1,2}(th|nd|rd|){0,1})?/i)
+      matches = text.scan(/((jan|feb|mar|apr|may|june|july|aug|sep|oct|nov|dec)(\s[0-9]{1,2}(th|nd|rd|){0,1})|[0-9]{1,2}\/[0-9]{1,2}(\/[0-9]{2,4})?)?/i)
       return matches[0][0] unless matches.empty?
     end
   end
