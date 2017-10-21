@@ -95,5 +95,34 @@ module Scheduler
     def test_time_with_label_longhand_double_digit_with_colon_pm
       assert_equal('12:20pm', @@parser.identify_time("eat dinner at 12:20pm"))
     end
+
+
+    def test_day_monday
+      assert_equal('monday', @@parser.identify_day("wash clothes on monday"))
+    end
+
+    def test_day_tuesday
+      assert_equal('tuesday', @@parser.identify_day("feed turtles on tuesday"))
+    end
+
+    def test_day_wednesday
+      assert_equal('wednesday', @@parser.identify_day("go to the bank on wednesday"))
+    end
+
+    def test_day_thursday
+      assert_equal('thursday', @@parser.identify_day("interview with company on thursday"))
+    end
+
+    def test_day_friday
+      assert_equal('friday', @@parser.identify_day("deploy system on friday"))
+    end
+
+    def test_day_saturday
+      assert_equal('saturday', @@parser.identify_day("go hiking on saturday"))
+    end
+
+    def test_day_sunday
+      assert_equal('sunday', @@parser.identify_day("relax on sunday"))
+    end
   end
 end

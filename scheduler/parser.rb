@@ -17,6 +17,10 @@ module Scheduler
       return text.scan(/([0-9]{1,2}:?[0-9]{0,2}(pm|am))/)[0][0]
     end
 
+    def identify_day(text)
+      return text.scan(/(monday|mon|tuesday|tue|wednesday|wed|thursday|thu|friday|fri|saturday|sat|sunday|sun)/).first.first
+    end
+
     def identify_date(text)
       return text.scan(/(jan|feb|mar|apr|may|june|july|aug|sep|oct|nov|dec)(\s[0-9]{1,2}(th|nd|rd|){0,1})?/)
     end
