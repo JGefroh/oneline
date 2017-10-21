@@ -11,11 +11,17 @@ module Scheduler
       data[:time] = identify_time(text)
       data[:day] = identify_day(text)
       data[:date] = identify_date(text)
+      data[:relative_day] = identify_relative_day(text)
       return data
     end
 
     def identify_time(text)
       matches = text.scan(/([0-9]{1,2}:?[0-9]{0,2}(pm|am))/)
+      return matches[0][0] unless matches.empty?
+    end
+
+    def identify_relative_day(text)
+      matches = text.scan(/(today|tomorrow)/)
       return matches[0][0] unless matches.empty?
     end
 

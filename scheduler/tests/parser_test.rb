@@ -150,5 +150,14 @@ module Scheduler
     def test_date_longhand
       assert_equal('02/14/2014', @@parser.identify_date("02/14/2014"))
     end
+    
+
+    def test_relative_day_today
+      assert_equal('today', @@parser.identify_relative_day('play frolf today'))
+    end
+
+    def test_relative_day_tomorrow
+      assert_equal('tomorrow', @@parser.identify_relative_day('pick up cake tomorrow'))
+    end
   end
 end

@@ -105,5 +105,14 @@ module Scheduler
       date = @@interpreter.set_date_from_date("05/25/2018")
       assert_not_equal(Date.strptime("05/23/2018", '%m/%d/%Y'), date)
     end
+
+
+    def test_relative_day_today
+      assert_equal(Date.today, @@interpreter.set_date_from_relative_day('today'))
+    end
+
+    def test_relative_day_tomorrow
+      assert_equal(Date.today + 1, @@interpreter.set_date_from_relative_day('tomorrow'))
+    end
   end
 end
