@@ -1,4 +1,5 @@
 require 'date'
+require 'time'
 module Scheduler
   class Interpreter
     def interpret(parsed_text)
