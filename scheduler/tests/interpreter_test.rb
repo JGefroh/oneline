@@ -21,7 +21,7 @@ module Scheduler
     def test_interpret_2
       parsed_data = {
         time: '12am',
-        date: (Date.today + 3).strftime("%A")
+        day: (Date.today + 3).strftime("%A")
       }
       data = @@interpreter.interpret(parsed_data)
       assert_equal(Time.parse("12:00am"), data[:time])
