@@ -8,8 +8,11 @@ input = nil
 while input != 'exit'
   input = gets
   task = processor.process(input)
+  puts task
+  
   if task[:interpreted]
     tasks << task
-    puts tasks
+    puts "Your list.."
+    tasks.each{ |task| puts "* #{task[:original_text]}"}
   end
 end

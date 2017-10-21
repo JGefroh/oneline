@@ -137,10 +137,10 @@ module Scheduler
     def test_day_sunday
       assert_equal('sunday', @@parser.identify_day("relax on sunday"))
     end
-    
+
 
     def test_date_shorthand
-      assert_equal('1/24', @@parser.identify_date("1/24"))
+      assert_equal('3/4', @@parser.identify_date("3/4"))
     end
 
     def test_date_shorthand_leading_zero

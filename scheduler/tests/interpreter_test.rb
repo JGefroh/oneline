@@ -82,8 +82,8 @@ module Scheduler
     end
 
     def test_interpret_date_shorthand
-      date = @@interpreter.set_date_from_date("1/24")
-      assert_equal(Date.strptime("01/24/#{Date.today.year}", '%m/%d/%Y'), date)
+      date = @@interpreter.set_date_from_date("3/4")
+      assert_equal(Date.strptime("03/4/#{Date.today.year}", '%m/%d/%Y'), date)
     end
 
     def test_interpret_date_shorthand_leading_zero
