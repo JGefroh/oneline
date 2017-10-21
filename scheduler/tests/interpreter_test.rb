@@ -80,5 +80,30 @@ module Scheduler
       assert_equal(expected_time.min, time.min)
       assert_equal(expected_time.sec, time.sec)
     end
+
+    def test_interpret_date_shorthand
+      date = @@interpreter.set_date_from_date("1/24")
+      assert_equal(Date.strptime("01/24/#{Date.today.year}", '%m/%d/%Y'), date)
+    end
+
+    def test_interpret_date_shorthand_leading_zero
+      date = @@interpreter.set_date_from_date("01/25")
+      assert_equal(Date.strptime("01/25/#{Date.today.year}", '%m/%d/%Y'), date)
+    end
+
+    def test_interpret_date_longhand
+      date = @@interpreter.set_date_from_date("1/25/2016")
+      assert_equal(Date.strptime("1/25/2016", '%m/%d/%Y'), date)
+    end
+
+    def test_interpret_date_longhand_leading_zero
+      date = @@interpreter.set_date_from_date("05/25/2018")
+      assert_equal(Date.strptime("05/25/2018", '%m/%d/%Y'), date)
+    end
+
+    def test_interpret_date_longhand_leading_zero_different
+      date = @@interpreter.set_date_from_date("05/25/2018")
+      assert_not_equal(Date.strptime("05/23/2018", '%m/%d/%Y'), date)
+    end
   end
 end
