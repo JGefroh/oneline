@@ -8,6 +8,27 @@ module Scheduler
     end
 
 
+    def test_interpret_1
+      parsed_data = {
+        time: '12pm',
+        day: Date.today.strftime("%A")
+      }
+      data = @@interpreter.interpret(parsed_data)
+      assert_equal(Time.parse("12:00pm"), data[:time])
+      assert_equal(Date.today, data[:date])
+    end
+
+    def test_interpret_2
+      parsed_data = {
+        time: '12am',
+        date: (Date.today + 3).strftime("%A")
+      }
+      data = @@interpreter.interpret(parsed_data)
+      assert_equal(Time.parse("12:00am"), data[:time])
+      assert_equal(Date.today + 3, data[:date])
+    end
+
+
     def test_interpret_day_today
       date = @@interpreter.set_date_from_day(Date.today.strftime("%A"))
       assert_equal(Date.today, date)
