@@ -1,3 +1,6 @@
+require_relative 'parser'
+require_relative 'interpreter'
+
 module Scheduler
   class Processor
     def process(text)
@@ -5,7 +8,11 @@ module Scheduler
       parsed_text = parser.parse(text)
 
       interpreter = Scheduler::Interpreter.new
-      interpreted_data = interpreter.interpret(text)
+      interpreted_data = interpreter.interpret(parsed_text)
+
+      interpreted_data[:original_text] = text
+      
+      return interpreted_data
     end
   end
 end

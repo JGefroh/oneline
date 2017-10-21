@@ -8,7 +8,6 @@ module Scheduler
       #<X> <on|at|in> <|time-period|time|date|day>
       data = {}
       last_operator_index = text.index(' on ') || text.index(' at ') || text.index(' in ')
-      data[:label] = text
       data[:time] = identify_time(text)
       data[:day] = identify_day(text)
       return data
