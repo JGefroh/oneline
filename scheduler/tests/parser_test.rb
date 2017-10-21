@@ -1,5 +1,5 @@
 require "test/unit"
-require_relative 'parser'
+require_relative '../parser'
 module Scheduler
   class ParserTest < Test::Unit::TestCase
     def self.startup

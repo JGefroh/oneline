@@ -1,5 +1,6 @@
 require 'date'
 require 'time'
+
 module Scheduler
   class Interpreter
     def interpret(parsed_text)
@@ -7,7 +8,6 @@ module Scheduler
     end
 
     private def to_data(parsed_text)
-      #<X> <on|at|in> <|time-period|time|date|day>
       interpreted_data = {}
       interpreted_data[:date] = set_date_from_day(parsed_text[:day]) if parsed_text[:day]
       interpreted_data[:date] = set_date_from_day(parsed_text[:date]) if parsed_text[:date]

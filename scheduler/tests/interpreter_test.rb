@@ -1,6 +1,6 @@
 require 'date'
 require "test/unit"
-require_relative 'interpreter'
+require_relative '../interpreter'
 module Scheduler
   class InterpreterTest < Test::Unit::TestCase
     def self.startup
