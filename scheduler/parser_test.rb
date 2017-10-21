@@ -16,6 +16,19 @@ module Scheduler
     end
 
 
+    def test_parse_1
+      data = @@parser.parse("Go to the store at 12pm on Friday.")
+      assert_equal("12pm", data[:time])
+      assert_equal("Friday", data[:day])
+    end
+
+    def test_parse_2
+      data = @@parser.parse("Eat a potato at 3:00pm on thu.")
+      assert_equal("3:00pm", data[:time])
+      assert_equal("thu", data[:day])
+    end
+
+
     def test_label_multiword_at
       data = @@parser.parse("coffee meeting at 12pm")
     end

@@ -20,12 +20,12 @@ module Scheduler
     end
 
     def identify_day(text)
-      matches = text.scan(/(monday|mon|tuesday|tue|wednesday|wed|thursday|thu|friday|fri|saturday|sat|sunday|sun)/)
+      matches = text.scan(/(monday|mon|tuesday|tue|wednesday|wed|thursday|thu|friday|fri|saturday|sat|sunday|sun)/i)
       return matches[0][0] unless matches.empty?
     end
 
     def identify_date(text)
-      matches = text.scan(/(jan|feb|mar|apr|may|june|july|aug|sep|oct|nov|dec)(\s[0-9]{1,2}(th|nd|rd|){0,1})?/)
+      matches = text.scan(/(jan|feb|mar|apr|may|june|july|aug|sep|oct|nov|dec)(\s[0-9]{1,2}(th|nd|rd|){0,1})?/i)
       return matches[0][0] unless matches.empty?
     end
   end
