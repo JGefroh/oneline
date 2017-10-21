@@ -24,7 +24,8 @@ module Scheduler
       return Date.parse(parsed_day)
     end
 
-    def set_time_from_time
+    def set_time_from_time(parsed_time)
+      return Time.parse(parsed_time)
     end
   end
 end
