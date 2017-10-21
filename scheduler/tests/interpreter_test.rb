@@ -7,25 +7,47 @@ module Scheduler
       @@interpreter = Scheduler::Interpreter.new
     end
 
+    def test_interpret_empty
+      parsed_data = {}
+      data = @@interpreter.interpret(parsed_data)
+      assert_not_equal(true, data[:interpreted])
+    end
 
-    def test_interpret_1
+
+    def test_interpret_time
       parsed_data = {
         time: '12pm',
-        day: Date.today.strftime("%A")
       }
       data = @@interpreter.interpret(parsed_data)
       assert_equal(Time.parse("12:00pm"), data[:time])
-      assert_equal(Date.today, data[:date])
+      assert_equal(true, data[:interpreted])
     end
 
-    def test_interpret_2
+    def test_interpret_date
       parsed_data = {
-        time: '12am',
+        date: '07/14/2017'
+      }
+      data = @@interpreter.interpret(parsed_data)
+      assert_equal(Date.strptime('07/14/2017', '%m/%d/%Y'), data[:date])
+      assert_equal(true, data[:interpreted])
+    end
+
+    def test_interpret_day
+      parsed_data = {
         day: (Date.today + 3).strftime("%A")
       }
       data = @@interpreter.interpret(parsed_data)
-      assert_equal(Time.parse("12:00am"), data[:time])
       assert_equal(Date.today + 3, data[:date])
+      assert_equal(true, data[:interpreted])
+    end
+
+    def test_interpret_relative_day
+      parsed_data = {
+        relative_day: "tomorrow"
+      }
+      data = @@interpreter.interpret(parsed_data)
+      assert_equal(Date.today + 1, data[:date])
+      assert_equal(true, data[:interpreted])
     end
 
 
