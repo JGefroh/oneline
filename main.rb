@@ -15,8 +15,8 @@ class Main
     while input.strip != 'exit'
       print "> "
       input = gets
+      print_help and return if input.strip === 'help' || input.strip === 'help me'
       processor.process(input)
-      print_help if input.strip === 'help' || input.strip === 'help me'
     end
   end
 

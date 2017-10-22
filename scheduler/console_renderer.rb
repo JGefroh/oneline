@@ -10,7 +10,7 @@ module Scheduler
       puts "----- Great! I'll remind you to `#{task[:label]}` today at #{task[:time].strftime('%l:%M %P').strip}." if task[:date].nil? && !task
     end
 
-    def render_list(tasks)
+    private def render_list(tasks)
       puts "----- Your list..\n"
       tasks.each{ |task| puts "----- * #{task[:original_text]}"}
     end
