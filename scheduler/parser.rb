@@ -14,22 +14,23 @@ module Scheduler
       data = {}
       last_operator_index = text.index(' on ') || text.index(' at ') || text.index(' in ')
 
-      time = identify_time(text)
-      store(time, data, :time)
-
-      day = identify_day(text)
-      store(day, data, :day)
-
-      relative_day = identify_relative_day(text)
-      store(relative_day, data, :relative_day)
-
-      date = identify_date(text)
-      store(date, data, :date)
-
-      label = identify_label(text)
-      data[:label] = label
+      identify_and_store(:time, data, text)
+      identify_and_store(:day, data, text)
+      identify_and_store(:relative_day, data, text)
+      identify_and_store(:date, data, text)
+      identify_and_store(:label, data, text)
 
       return data
+    end
+
+    def identify_and_store(field, data, text)
+      if field === :label
+        label = identify_label(text)
+        data[:label] = label
+      else
+        identified_field = send("identify_#{field}", text)
+        store(identified_field, data, field)
+      end
     end
 
     def identify_time(text)
