@@ -60,18 +60,22 @@ module Scheduler
       label = text.dup
 
       date = identify_date(label)
-      label.slice!(date[:index], date[:date].length) unless date.nil?
+      date_article_offset = label[date[:index] - 4, 4] === ' at ' ? 4 : 0 unless date.nil?
+      label.slice!(date[:index] - date_article_offset, date[:date].length + date_article_offset) unless date.nil?
 
       relative_day = identify_relative_day(label)
-      label.slice!(relative_day[:index], relative_day[:relative_day].length) unless relative_day.nil?
+      relative_day_article_offset = label[relative_day[:index] - 4, 4] === ' on ' ? 4 : 0 unless relative_day.nil?
+      label.slice!(relative_day[:index] - relative_day_article_offset, relative_day[:relative_day].length + relative_day_article_offset) unless relative_day.nil?
 
       time = identify_time(label)
-      label.slice!(time[:index], time[:time].length) unless time.nil?
+      time_article_offset = label[time[:index] - 4, 4] === ' at ' ? 4 : 0 unless time.nil?
+      label.slice!(time[:index] - time_article_offset, time[:time].length + time_article_offset) unless time.nil?
 
       day = identify_day(label)
-      label.slice!(day[:index], day[:day].length) unless day.nil?
+      day_article_offset = label[day[:index] - 4, 4] === ' on ' ? 4 : 0 unless day.nil?
+      label.slice!(day[:index] - day_article_offset, day[:day].length + day_article_offset) unless day.nil?
 
-      return label
+      return label.strip
     end
 
     private def store(source, target, field)

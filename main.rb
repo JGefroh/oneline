@@ -22,9 +22,9 @@ class Main
 
       if task[:interpreted]
         @tasks << task
-        puts "----- Great! I'll remind you about this on #{task[:date]} at #{task[:time].strftime('%l:%M %P').strip}." if !task[:date].nil? && !task[:time].nil?
-        puts "----- Great! I'll remind you about this on #{task[:date]}." if !task[:date].nil? && task[:time].nil?
-        puts "----- Great! I'll remind you about this today at #{task[:time].strftime('%l:%M %P').strip}." if task[:date].nil? && !task[:time].nil?
+        puts "----- Great! I'll remind you to `#{task[:label]}` on #{task[:date]} at #{task[:time].strftime('%l:%M %P').strip}." if !task[:date].nil? && !task[:time].nil?
+        puts "----- Great! I'll remind you to `#{task[:label]}` on #{task[:date]}." if !task[:date].nil? && task[:time].nil?
+        puts "----- Great! I'll remind you to `#{task[:label]}` today at #{task[:time].strftime('%l:%M %P').strip}." if task[:date].nil? && !task[:time].nil?
       end
     end
   end
