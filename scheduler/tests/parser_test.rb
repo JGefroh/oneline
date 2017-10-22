@@ -8,11 +8,13 @@ module Scheduler
 
     def test_junk_text
       data = @@parser.parse("junk text")
+      assert_equal('junk text', data[:label])
     end
 
 
     def test_label_at
       data = @@parser.parse("meeting at 12pm")
+      assert_equal('meeting', data[:label])
     end
 
 
@@ -39,27 +41,33 @@ module Scheduler
 
     def test_label_multiword_at
       data = @@parser.parse("coffee meeting at 12pm")
+      assert_equal('coffee meeting', data[:label])
     end
 
     def test_label_multiword_in
       data = @@parser.parse("coffee meeting in 10min")
+      assert_equal('coffee meeting in 10min', data[:label])
     end
 
     def test_label_multiword_on
       data = @@parser.parse("coffee meeting on 12/4")
+      assert_equal('coffee meeting', data[:label])
     end
 
 
     def test_label_multiword_duplicate_at
       data = @@parser.parse("meet boss at coffee shop in 12 minutes")
+      assert_equal('meet boss at coffee shop in 12 minutes', data[:label])
     end
 
     def test_label_multiword_duplicate_in
       data = @@parser.parse("catch bus at 12pm")
+      assert_equal('catch bus', data[:label])
     end
 
     def test_label_multiword_duplicate_on
       data = @@parser.parse("eat potatos in restaurant on boat at 12pm")
+      assert_equal('eat potatos in restaurant on boat', data[:label])
     end
 
 

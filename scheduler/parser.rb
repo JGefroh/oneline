@@ -60,7 +60,7 @@ module Scheduler
       label = text.dup
 
       date = identify_date(label)
-      date_article_offset = label[date[:index] - 4, 4] === ' at ' ? 4 : 0 unless date.nil?
+      date_article_offset = [' on ', ' at '].include?(label[date[:index] - 4, 4]) ? 4 : 0 unless date.nil?
       label.slice!(date[:index] - date_article_offset, date[:date].length + date_article_offset) unless date.nil?
 
       relative_day = identify_relative_day(label)
