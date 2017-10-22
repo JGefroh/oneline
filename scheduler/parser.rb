@@ -10,16 +10,8 @@ module Scheduler
     end
 
     private def to_data(text)
-      #<X> <on|at|in> <|time-period|time|date|day>
       data = {}
-      last_operator_index = text.index(' on ') || text.index(' at ') || text.index(' in ')
-
-      identify_and_store(:time, data, text)
-      identify_and_store(:day, data, text)
-      identify_and_store(:relative_day, data, text)
-      identify_and_store(:date, data, text)
-      identify_and_store(:label, data, text)
-
+      [:date, :day, :label, :relative_day, :time].each{ |field| identify_and_store(field, data, text) }
       return data
     end
 
