@@ -15,17 +15,8 @@ class Main
     while input.strip != 'exit'
       print "> "
       input = gets
-      task = processor.process(input)
-
-      print_list if input.strip === 'list'
+      processor.process(input)
       print_help if input.strip === 'help' || input.strip === 'help me'
-
-      if task[:interpreted]
-        @tasks << task
-        puts "----- Great! I'll remind you to `#{task[:label]}` on #{task[:date]} at #{task[:time].strftime('%l:%M %P').strip}." if !task[:date].nil? && !task[:time].nil?
-        puts "----- Great! I'll remind you to `#{task[:label]}` on #{task[:date]}." if !task[:date].nil? && task[:time].nil?
-        puts "----- Great! I'll remind you to `#{task[:label]}` today at #{task[:time].strftime('%l:%M %P').strip}." if task[:date].nil? && !task[:time].nil?
-      end
     end
   end
 
@@ -35,11 +26,6 @@ class Main
     puts ""
     puts "Type 'list' to see everything I'm remembering at the moment."
     puts "Type 'exit' to quit."
-  end
-
-  def print_list
-    puts "----- Your list..\n"
-    @tasks.each{ |task| puts "----- * #{task[:original_text]}"}
   end
 end
 
