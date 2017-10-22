@@ -64,108 +64,108 @@ module Scheduler
 
 
     def test_time_shorthand_double_digit_pm
-      assert_equal('12pm', @@parser.identify_time("12pm"))
+      assert_equal('12pm', @@parser.identify_time("12pm")[:time])
     end
 
     def test_time_shorthand_double_digit_am
-      assert_equal('12am', @@parser.identify_time("12am"))
+      assert_equal('12am', @@parser.identify_time("12am")[:time])
     end
 
 
     def test_time_longhand_double_digit_no_colon_pm
-      assert_equal('1220pm', @@parser.identify_time("1220pm"))
+      assert_equal('1220pm', @@parser.identify_time("1220pm")[:time])
     end
 
     def test_time_longhand_double_digit_no_colon_am
-      assert_equal('1220am', @@parser.identify_time("1220am"))
+      assert_equal('1220am', @@parser.identify_time("1220am")[:time])
     end
 
 
     def test_time_longhand_double_digit_with_colon_am
-      assert_equal('12:20am', @@parser.identify_time("12:20am"))
+      assert_equal('12:20am', @@parser.identify_time("12:20am")[:time])
     end
 
     def test_time_longhand_double_digit_with_colon_pm
-      assert_equal('12:20pm', @@parser.identify_time("12:20pm"))
+      assert_equal('12:20pm', @@parser.identify_time("12:20pm")[:time])
     end
 
 
 
     def test_time_with_label_shorthand_double_digit_pm
-      assert_equal('12pm', @@parser.identify_time("meet caroline at 12pm"))
+      assert_equal('12pm', @@parser.identify_time("meet caroline at 12pm")[:time])
     end
 
     def test_time_with_label_shorthand_double_digit_am
-      assert_equal('12am', @@parser.identify_time("meet caroline at 12am"))
+      assert_equal('12am', @@parser.identify_time("meet caroline at 12am")[:time])
     end
 
 
     def test_time_with_label_longhand_double_digit_no_colon_pm
-      assert_equal('1220pm', @@parser.identify_time("call chris at 1220pm"))
+      assert_equal('1220pm', @@parser.identify_time("call chris at 1220pm")[:time])
     end
 
     def test_time_with_label_longhand_double_digit_no_colon_am
-      assert_equal('1220am', @@parser.identify_time("call chris at 1220am"))
+      assert_equal('1220am', @@parser.identify_time("call chris at 1220am")[:time])
     end
 
 
     def test_time_with_label_longhand_double_digit_with_colon_am
-      assert_equal('12:20am', @@parser.identify_time("eat dinner at 12:20am"))
+      assert_equal('12:20am', @@parser.identify_time("eat dinner at 12:20am")[:time])
     end
 
     def test_time_with_label_longhand_double_digit_with_colon_pm
-      assert_equal('12:20pm', @@parser.identify_time("eat dinner at 12:20pm"))
+      assert_equal('12:20pm', @@parser.identify_time("eat dinner at 12:20pm")[:time])
     end
 
 
     def test_day_monday
-      assert_equal('monday', @@parser.identify_day("wash clothes on monday"))
+      assert_equal('monday', @@parser.identify_day("wash clothes on monday")[:day])
     end
 
     def test_day_tuesday
-      assert_equal('tuesday', @@parser.identify_day("feed turtles on tuesday"))
+      assert_equal('tuesday', @@parser.identify_day("feed turtles on tuesday")[:day])
     end
 
     def test_day_wednesday
-      assert_equal('wednesday', @@parser.identify_day("go to the bank on wednesday"))
+      assert_equal('wednesday', @@parser.identify_day("go to the bank on wednesday")[:day])
     end
 
     def test_day_thursday
-      assert_equal('thursday', @@parser.identify_day("interview with company on thursday"))
+      assert_equal('thursday', @@parser.identify_day("interview with company on thursday")[:day])
     end
 
     def test_day_friday
-      assert_equal('friday', @@parser.identify_day("deploy system on friday"))
+      assert_equal('friday', @@parser.identify_day("deploy system on friday")[:day])
     end
 
     def test_day_saturday
-      assert_equal('saturday', @@parser.identify_day("go hiking on saturday"))
+      assert_equal('saturday', @@parser.identify_day("go hiking on saturday")[:day])
     end
 
     def test_day_sunday
-      assert_equal('sunday', @@parser.identify_day("relax on sunday"))
+      assert_equal('sunday', @@parser.identify_day("relax on sunday")[:day])
     end
 
 
     def test_date_shorthand
-      assert_equal('3/4', @@parser.identify_date("3/4"))
+      assert_equal('3/4', @@parser.identify_date("3/4")[:date])
     end
 
     def test_date_shorthand_leading_zero
-      assert_equal('03/03', @@parser.identify_date("03/03"))
+      assert_equal('03/03', @@parser.identify_date("03/03")[:date])
     end
 
     def test_date_longhand
-      assert_equal('02/14/2014', @@parser.identify_date("02/14/2014"))
+      assert_equal('02/14/2014', @@parser.identify_date("02/14/2014")[:date])
     end
 
 
     def test_relative_day_today
-      assert_equal('today', @@parser.identify_relative_day('play frolf today'))
+      assert_equal('today', @@parser.identify_relative_day('play frolf today')[:relative_day])
     end
 
     def test_relative_day_tomorrow
-      assert_equal('tomorrow', @@parser.identify_relative_day('pick up cake tomorrow'))
+      assert_equal('tomorrow', @@parser.identify_relative_day('pick up cake tomorrow')[:relative_day])
     end
   end
 end
