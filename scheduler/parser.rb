@@ -63,10 +63,7 @@ module Scheduler
     end
 
     private def store(source, target, field)
-      unless source.nil?
-        target[field] = source[field]
-        target["#{field}index".to_sym] = source[:index]
-      end
+      target[field] = source[field] unless source.nil?
     end
   end
 end
