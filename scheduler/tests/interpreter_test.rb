@@ -50,6 +50,16 @@ module Scheduler
       assert_equal(true, data[:interpreted])
     end
 
+    def test_interpret_relative_time
+      parsed_data = {
+        relative_time: '15min'
+      }
+      data = @@interpreter.interpret(parsed_data)
+      assert_equal((Time.now + (15 * 60)).to_i, data[:time].to_i)
+      assert_equal(true, data[:interpreted])
+    end
+
+
 
     def test_interpret_day_today
       date = @@interpreter.send(:set_date_from_day, Date.today.strftime("%A"))
@@ -130,11 +140,33 @@ module Scheduler
 
 
     def test_relative_day_today
-      assert_equal(Date.today, @@interpreter.send(:set_date_from_relative_day, 'today'))
+      date = @@interpreter.send(:set_date_from_relative_day, 'today')
+      assert_equal(Date.today, date)
     end
 
     def test_relative_day_tomorrow
-      assert_equal(Date.today + 1, @@interpreter.send(:set_date_from_relative_day, 'tomorrow'))
+      date = @@interpreter.send(:set_date_from_relative_day, 'tomorrow')
+      assert_equal(Date.today + 1, date)
+    end
+
+    def test_relative_time_seconds
+      time = @@interpreter.send(:set_time_from_relative_time, '3 seconds')
+      assert_equal((Time.now + 3).to_i, time.to_i)
+    end
+
+    def test_relative_time_minutes
+      time = @@interpreter.send(:set_time_from_relative_time, '10 minutes')
+      assert_equal((Time.now + (10 * 60)).to_i, time.to_i)
+    end
+
+    def test_relative_time_hours
+      time = @@interpreter.send(:set_time_from_relative_time, '20 hours')
+      assert_equal((Time.now + (20 * 60 * 60)).to_i, time.to_i)
+    end
+
+    def test_relative_time_unit_different
+      time = @@interpreter.send(:set_time_from_relative_time, '20 minutes')
+      assert_not_equal((Time.now + (20 * 60 * 60)).to_i, time.to_i)
     end
   end
 end

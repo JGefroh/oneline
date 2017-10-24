@@ -13,7 +13,7 @@ class Main
   def start
     @processors << Scheduler::Processor.new(@tasks)
     @processors << Help::Processor.new()
-    worker = Notifier::Worker.new([])
+    worker = Notifier::Worker.new(@tasks)
 
     worker.start()
 

@@ -1,9 +1,9 @@
 require_relative 'aws_sms_notifier'
 require 'time'
+$stdout.sync = true
 
 module Notifier
   class Worker
-    $stdout.sync = true
 
     attr_accessor :queue
     attr_accessor :notifier

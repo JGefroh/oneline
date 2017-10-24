@@ -46,7 +46,7 @@ module Scheduler
 
     def test_label_multiword_in
       data = @@parser.parse("coffee meeting in 10min")
-      assert_equal('coffee meeting in 10min', data[:label])
+      assert_equal('coffee meeting', data[:label])
     end
 
     def test_label_multiword_on
@@ -57,7 +57,7 @@ module Scheduler
 
     def test_label_multiword_duplicate_at
       data = @@parser.parse("meet boss at coffee shop in 12 minutes")
-      assert_equal('meet boss at coffee shop in 12 minutes', data[:label])
+      assert_equal('meet boss at coffee shop', data[:label])
     end
 
     def test_label_multiword_duplicate_in

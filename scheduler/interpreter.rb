@@ -12,6 +12,7 @@ module Scheduler
       interpreted_data[:date] = set_date_from_day(parsed_text[:day]) if parsed_text[:day]
       interpreted_data[:date] = set_date_from_date(parsed_text[:date]) if parsed_text[:date]
       interpreted_data[:date] = set_date_from_relative_day(parsed_text[:relative_day]) if parsed_text[:relative_day]
+      interpreted_data[:time] = set_time_from_relative_time(parsed_text[:relative_time]) if parsed_text[:relative_time]
       interpreted_data[:time] = set_time_from_time(parsed_text[:time]) if parsed_text[:time]
       interpreted_data[:label] = parsed_text[:label].dup if parsed_text[:label]
       interpreted_data[:interpreted] = !interpreted_data[:date].nil? || !interpreted_data[:time].nil?
@@ -36,6 +37,25 @@ module Scheduler
     private def set_date_from_relative_day(parsed_relative_day)
       return Date.today if parsed_relative_day === 'today'
       return (Date.today + 1) if parsed_relative_day === 'tomorrow'
+    end
+
+    private def set_time_from_relative_time(parsed_relative_time)
+      time_number = parsed_relative_time.gsub(/[^0-9]+/, '').to_i
+      time_unit = parsed_relative_time.gsub(/[0-9]+/, '').downcase.strip
+
+      if ['s', 'sec', 'secs', 'second', 'seconds'].include?(time_unit)
+        time_number = time_number
+      end
+
+      if ['m', 'min', 'mins', 'minute', 'minutes'].include?(time_unit)
+        time_number = time_number * 60
+      end
+
+      if ['h', 'hr', 'hrs', 'hour', 'hours'].include?(time_unit)
+        time_number = time_number * 60 * 60
+      end
+
+      return Time.now + time_number
     end
   end
 end
