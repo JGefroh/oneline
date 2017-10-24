@@ -1,6 +1,7 @@
 require_relative 'parser'
 require_relative 'interpreter'
 require_relative 'console_renderer'
+require_relative 'scheduled_item'
 
 module Scheduler
   class Processor
@@ -9,7 +10,7 @@ module Scheduler
     attr_accessor :parser
     attr_accessor :interpreter
 
-    def initialize
+    def initialize()
       @parser = Scheduler::Parser.new
       @renderer = Scheduler::ConsoleRenderer.new
       @interpreter = Scheduler::Interpreter.new
@@ -25,13 +26,18 @@ module Scheduler
 
       #TODO: Create a notification request.
       #TODO: Save to a schedule or appropriate list.
-
       if interpreted_data[:interpreted]
-        @tasks << interpreted_data
-        @renderer.render(:on_create, interpreted_data)
+        item = to_scheduled_item(interpreted_data)
+        @tasks << item
+        @renderer.render(:on_create, item)
       end
 
-      return interpreted_data
+      return item
+    end
+
+    def to_scheduled_item(interpreted_data)
+      s = ScheduledItem.new(interpreted_data)
+      return s
     end
   end
 end

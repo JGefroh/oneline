@@ -1,12 +1,16 @@
 require_relative 'scheduler/processor'
+require_relative 'notifier/worker'
+
 class Main
   attr_accessor :tasks
   def initialize
-    @tasks = []
   end
 
   def start
-    processor = Scheduler::Processor.new
+    processor = Scheduler::Processor.new()
+    worker = Notifier::Worker.new(processor.tasks)
+
+    worker.start()
 
     input = ''
 
