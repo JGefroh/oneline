@@ -26,8 +26,6 @@ module Scheduler
       interpreted_data = interpreter.interpret(parsed_text)
       interpreted_data[:original_text] = text
 
-      #TODO: Create a notification request.
-      #TODO: Save to a schedule or appropriate list.
       if interpreted_data[:interpreted]
         item = to_scheduled_item(interpreted_data)
         @tasks << item

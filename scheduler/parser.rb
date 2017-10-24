@@ -25,14 +25,14 @@ module Scheduler
       end
     end
 
-    def identify_field(field, text)
+    private def identify_field(field, text)
       regex = self.class.const_get("#{field.to_s.upcase}_REGEX")
       matches = text.scan(regex)
       first_match_index = text.index(regex)
       return {"#{field}": matches[0][0], index: first_match_index} unless matches.empty?
     end
 
-    def identify_label(text)
+    private def identify_label(text)
       label = text.dup
 
       date = identify_field(:date, label)
