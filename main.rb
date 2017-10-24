@@ -1,5 +1,4 @@
 require_relative 'scheduler/processor'
-
 class Main
   attr_accessor :tasks
   def initialize
