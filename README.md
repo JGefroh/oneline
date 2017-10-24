@@ -1,11 +1,15 @@
 # 1line
 
-1line is a personal assistant application I am writing to simplify my life. 
+1line is a personal assistant application I am writing to simplify my life.
 
 I plan on adding many modules and features to it, but the initial rollout will include a basic scheduling and notification service to help me remember appointments and to-do-lists.
 
+# Requirements
+* ruby
+* foreman `gem install foreman`
+
 # Run
-`ruby main.rb`
+`foreman run ruby main.rb`
 
 ```shell
 Hi, I'm your personal assistant. Type 'help me' to see what I can do!
