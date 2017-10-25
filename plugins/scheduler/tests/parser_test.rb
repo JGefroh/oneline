@@ -70,6 +70,10 @@ module Scheduler
       assert_equal('eat potatos in restaurant on boat', data[:label])
     end
 
+    def test_label_joseph_not_into_joh
+      data = @@parser.parse("call joseph at 12pm")
+      assert_equal('call joseph', data[:label])
+    end
 
     def test_time_shorthand_double_digit_pm
       assert_equal('12pm', @@parser.send(:identify_field, :time, "12pm")[:time])
