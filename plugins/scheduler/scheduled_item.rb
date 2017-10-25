@@ -8,6 +8,7 @@ module Scheduler
     attr_accessor :date
     attr_accessor :time
     attr_accessor :original_text
+    attr_accessor :created_at
 
     def initialize(params = {})
       @label = params[:label]
@@ -15,6 +16,7 @@ module Scheduler
       @time = params[:time]
       @original_text = params[:original_text]
       @last_notified = params[:last_notified]
+      @created_at = DateTime.now
     end
 
     def notify?
