@@ -12,15 +12,21 @@ module Scheduler
 
     def load(plugin)
       super(plugin)
-      @processor = Scheduler::Processor.new(OneLine::Store.data)
+      @processor = Scheduler::Processor.new()
     end
 
     def process(data)
-      return processor.process(data)
+      item = processor.process(data)
+      add_to_notification_queue(item) if item
     end
 
     def process?(data)
       return processor.process?(data)
+    end
+
+    private def add_to_notification_queue(item)
+      notification_queue = OneLine::Store.data["Notifier::Plugin-queue"] || []
+      notification_queue << item if notification_queue
     end
   end
 end

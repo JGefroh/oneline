@@ -10,11 +10,11 @@ module Scheduler
     attr_accessor :parser
     attr_accessor :interpreter
 
-    def initialize(tasks = [])
+    def initialize()
       @parser = Scheduler::Parser.new
       @renderer = Scheduler::ConsoleRenderer.new
       @interpreter = Scheduler::Interpreter.new
-      @tasks = tasks
+      @tasks = []
     end
 
     def process(text)

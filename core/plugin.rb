@@ -2,8 +2,8 @@ require_relative 'store'
 module OneLine
   module Plugin
     def load(plugin)
+      OneLine::Store.plugins[plugin.class] = plugin
       puts "Loaded #{plugin.class}"
-      OneLine::Store.plugins << plugin
     end
 
     def process?(data)

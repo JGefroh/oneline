@@ -11,7 +11,7 @@ module OneLine
         print "> "
         input = gets
         input = input.strip
-        OneLine::Store.plugins.each { |plugin|
+        OneLine::Store.plugins.each { |key, plugin|
           begin
            plugin.process(input) if plugin.process?(input)
           rescue Exception => e

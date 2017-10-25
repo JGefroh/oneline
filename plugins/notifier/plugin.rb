@@ -6,7 +6,9 @@ module Notifier
     include OneLine::Plugin
     def initialize()
       load(self)
-      worker = Notifier::Worker.new(OneLine::Store.data)
+      notification_queue = []
+      OneLine::Store.data["#{self.class}-queue"] = notification_queue
+      worker = Notifier::Worker.new(notification_queue)
       worker.start()
     end
 

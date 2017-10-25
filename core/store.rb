@@ -1,7 +1,7 @@
 module OneLine
   class Store
-    @@plugins = []
-    @@data = []
+    @@plugins = {}
+    @@data = {}
 
     def self.data
       return @@data
