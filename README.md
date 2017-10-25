@@ -16,7 +16,7 @@ You're a busy person with many important things to do. Why waste time rememberin
 
 
 ### Tells you jokes!
-OneLine uses the API provided by [icanhazdadjoke](https://icanhazdadjoke.com) to fetch you the very ~best~ worst dad-jokes and lame puns. It's almost as if I were telling you the jokes myself!
+OneLine will tell you the very ~best~ worst dad-jokes and lame puns. It's almost as if I were telling you the jokes myself!
 
 We currently support Dad jokes and Chuck Norris jokes.
 ```
@@ -27,6 +27,10 @@ We currently support Dad jokes and Chuck Norris jokes.
 > tell me a chuck norris joke
 ----- Do you know why Baskin Robbins only has 31 flavors? Because Chuck Norris doesn't like Fudge Ripple.
 ```
+
+Thanks to the following API providers for their jokes:
+* [icanhazdadjoke](https://icanhazdadjoke.com)
+* [The Internet Chuck Norris Database](http://www.icndb.com/)
 
 ### Modular architecture
 OneLine uses a plugin architecture to make adding additional functionality easy! It'll auto-detect any plugins you create and automatically start using them.
