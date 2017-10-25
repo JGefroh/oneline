@@ -25,7 +25,6 @@ module Notifier
 
     def process
       @queue.each{|item|
-        puts item
         if item.notify?
           @notifier.notify(ENV['PHONE_NUMBER'], item.original_text)
           item.last_notified = Time.now
