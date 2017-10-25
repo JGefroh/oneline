@@ -5,6 +5,8 @@ module Scheduler
     RELATIVE_TIME_REGEX = /([0-9]+\s?(minutes|minute|mins|min|m|hours|hour|hrs|hr|h|seconds|second|secs|sec|s))/i
     DAY_REGEX = /\b(monday|mon|tuesday|tue|wednesday|wed|thursday|thu|friday|fri|saturday|sat|sunday|sun)\b/i
     DATE_REGEX = /((january|jan|february|feb|march|mar|april|apr|may|june|jun|july|jul|august|aug|september|sep|october|oct|november|nov|december|dec)\s([0-9]{1,2}(th|nd|rd|){0,1})?|[0-9]{1,2}\/[0-9]{1,2}(\/[0-9]{2,4})?)/i
+    COMMAND_REGEX = /^(remove) \d+$/i
+    REMOVE_INDEX_REGEX = /(\d+)$/i
 
     def parse(text)
       return to_data(text)
@@ -12,7 +14,7 @@ module Scheduler
 
     private def to_data(text)
       data = {}
-      [:date, :day, :label, :relative_day, :relative_time, :time].each{ |field| identify_and_store(field, data, text) }
+      [:command, :date, :day, :label, :relative_day, :relative_time, :remove_index, :time].each{ |field| identify_and_store(field, data, text) }
       return data
     end
 

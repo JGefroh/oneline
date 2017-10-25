@@ -6,28 +6,13 @@ module Scheduler
       @processor = Scheduler::Processor.new
     end
 
-    def test_process_task_add
+    def test_process_tasks_add
       @processor.process('add this task tomorrow')
       @processor.process('add this task today')
       assert_equal(2, @processor.tasks.length)
     end
 
-    def test_process_add_task
-      @processor.send(:add_task, 'task to add tomorrow')
-      @processor.send(:add_task, 'task to add in 12 minutes')
-      @processor.send(:add_task, 'task to add in 15 minutes')
-      assert_equal(3, @processor.tasks.length)
-    end
-
-    def test_remove_task
-      assert_equal(@processor.tasks.length, 0)
-      @processor.send(:add_task, 'task to add tomorrow')
-      assert_equal(@processor.tasks.length, 1)
-      @processor.send(:remove_task, 'remove 0')
-      assert_equal(@processor.tasks.length, 0)
-    end
-
-    def test_remove_tasks
+    def test_process_tasks_remove
       @processor.process('first task with index 0 tomorrow')
       @processor.process('second task with index 1 tomorrow')
       task_to_remove = @processor.process('third task with index 2 tomorrow')
@@ -38,6 +23,21 @@ module Scheduler
       removed_task = @processor.process('remove 2')
       assert_equal(4, @processor.tasks.length)
       assert_equal(task_to_remove.label, removed_task.label)
+    end
+
+    def test_add_task
+      @processor.send(:add_task, {label: 'task 1', date: Date.today})
+      @processor.send(:add_task,  {label: 'task 2', date: Date.today})
+      @processor.send(:add_task,  {label: 'task 3', date: Date.today})
+      assert_equal(3, @processor.tasks.length)
+    end
+
+    def test_remove_task
+      assert_equal(0, @processor.tasks.length)
+      @processor.send(:add_task, {label: 'task 1', date: Date.today, interpreted: true, command: 'add'})
+      assert_equal(1, @processor.tasks.length)
+      @processor.send(:remove_task, {command: 'remove', remove_index: 0, interpreted: true})
+      assert_equal(0, @processor.tasks.length)
     end
   end
 end

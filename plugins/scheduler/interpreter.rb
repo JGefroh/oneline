@@ -15,7 +15,9 @@ module Scheduler
       interpreted_data[:time] = set_time_from_relative_time(parsed_text[:relative_time]) if parsed_text[:relative_time]
       interpreted_data[:time] = set_time_from_time(parsed_text[:time]) if parsed_text[:time]
       interpreted_data[:label] = parsed_text[:label].dup if parsed_text[:label]
-      interpreted_data[:interpreted] = !interpreted_data[:date].nil? || !interpreted_data[:time].nil?
+      interpreted_data[:command] = parsed_text[:command] || 'add'
+      interpreted_data[:remove_index] = parsed_text[:remove_index].to_i if parsed_text[:remove_index]
+      interpreted_data[:interpreted] = !interpreted_data[:date].nil? || !interpreted_data[:time].nil? || interpreted_data[:command] === 'remove'
       return interpreted_data
     end
 

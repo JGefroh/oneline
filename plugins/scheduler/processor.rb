@@ -20,34 +20,31 @@ module Scheduler
     def process(text)
       @renderer.render(:on_list_request, @tasks) and return if text.chomp === 'list'
 
-      unless text.scan(/^(remove \d+)$/i).empty?
-        task = remove_task(text)
-        @renderer.render(:on_remove, task)
-        return task
-      end
+      parsed_text = parser.parse(text)
+      interpreted_data = interpreter.interpret(parsed_text)
+      interpreted_data[:original_text] = text
+      return unless interpreted_data[:interpreted]
 
-      task = add_task(text)
-      @renderer.render(:on_create, task)
+      if interpreted_data[:command] === 'add'
+        task = add_task(interpreted_data)
+        @renderer.render(:on_create, task)
+      elsif interpreted_data[:command] === 'remove'
+        task = remove_task(interpreted_data)
+        @renderer.render(:on_remove, task)
+      end
 
       return task
     end
 
-    private def add_task(text)
-      parsed_text = parser.parse(text)
-      interpreted_data = interpreter.interpret(parsed_text)
-      interpreted_data[:original_text] = text
-
-      if interpreted_data[:interpreted]
-        item = to_scheduled_item(interpreted_data)
-        @tasks << item
-      end
-
+    private def add_task(interpreted_data)
+      item = to_scheduled_item(interpreted_data)
+      @tasks << item
       return item
     end
 
-    private def remove_task(text)
-      task_index = text.split(' ')[1].to_i
-      task = @tasks.slice!(task_index)
+    private def remove_task(interpreted_data)
+      return if interpreted_data[:remove_index].nil?
+      task = @tasks.slice!(interpreted_data[:remove_index])
       return unless task
       task.force_ignore_notification = true
       return task
