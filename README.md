@@ -5,6 +5,8 @@
 ### Features:
 * Schedule tasks
 * Receive SMS / Text message notifications
+* Modular plugin architecture
+
 
 # Future Plans
 
@@ -15,7 +17,7 @@ I plan on adding many modules and features to it, but the initial rollout will i
 * foreman `gem install foreman`
 
 # Run
-`foreman run ruby main.rb`
+`foreman run ruby ./core/bootstrap.rb`
 
 ```shell
 Hi, I'm your personal assistant. Type 'help me' to see what I can do!
@@ -34,5 +36,6 @@ Type 'exit' to quit.
 ----- * Go to the movies at 2pm tomorrow.
 ----- * Interview on 10/14 at 1pm
 ```
-# Test
-`ruby test.rb`
+
+# Run tests
+`foreman run ruby ./core/bootstrap.rb test`
