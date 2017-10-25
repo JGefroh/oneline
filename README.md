@@ -1,6 +1,6 @@
-# 1line
+# OneLine
 
-1line is a personal assistant chatbot intended to simplify my life.
+OneLine is a personal assistant chatbot intended to simplify my life.
 
 # Features:
 
