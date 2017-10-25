@@ -19,7 +19,8 @@ module Scheduler
 
     def process(text)
       @renderer.render(:on_list_request, @tasks) and return if text.chomp === 'list'
-      return remove_task(text) if text.start_with?('remove ')
+      return remove_task(text) unless text.scan(/^(remove \d+)$/i).empty?
+
       parsed_text = parser.parse(text)
       interpreted_data = interpreter.interpret(parsed_text)
       interpreted_data[:original_text] = text
@@ -36,6 +37,7 @@ module Scheduler
     private def remove_task(text)
       task_index = text.split(' ')[1].to_i
       task = @tasks.slice!(task_index)
+      return unless task
       task.force_ignore_notification = true
       @renderer.render(:on_remove, task)
     end
