@@ -21,10 +21,13 @@ module Help
     end
 
     def print_help
-      puts "Ask me to remember something and I will."
-      puts "eg. 'Go to the movies at 2pm tomorrow.'"
-      puts ""
-      puts "Type 'list' to see everything I'm remembering at the moment."
+      OneLine::Store.data.each{|key, value|
+        if key.include?('help')
+          puts value
+          puts ""
+        end
+      }
+
       puts "Type 'exit' to quit."
     end
   end

@@ -7,12 +7,9 @@ module Scheduler
     attr_accessor :processor
 
     def initialize
-      load(self)
-    end
-
-    def load(plugin)
-      super(plugin)
       @processor = Scheduler::Processor.new()
+      initialize_help_messages()
+      load(self)
     end
 
     def process(data)
@@ -27,6 +24,14 @@ module Scheduler
     private def add_to_notification_queue(item)
       notification_queue = OneLine::Store.data["Notifier::Plugin-queue"] || []
       notification_queue << item if notification_queue
+    end
+
+    private def initialize_help_messages
+      OneLine::Store.data["#{self.class}-help"] = [
+        "I'll remember things with times or dates in them.",
+        "Try typing `go to the movies in 15 minutes` or `call friend at 2:35pm`!",
+        "You can type `list` to see what I've remembered for you.",
+      ]
     end
   end
 end
