@@ -14,21 +14,10 @@ module Scheduler
       @label = params[:label]
       @date = params[:date]
       @time = params[:time]
+      @notify_at_date = @date
+      @notify_at_time = @time
       @original_text = params[:original_text]
-      @last_notified = params[:last_notified]
       @created_at = DateTime.now
-    end
-
-    def notify?
-      return false unless last_notified.nil?
-
-      if @date && @time
-        datetime = DateTime.parse(date.to_s + " " + time.to_s)
-        return DateTime.now >= datetime
-      end
-      return Date.today >= @date if @date && !@time
-      return Time.now >= @time if !@date && @time
-      return false
     end
   end
 end

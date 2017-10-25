@@ -36,6 +36,7 @@ module Scheduler
     private def remove_task(text)
       task_index = text.split(' ')[1].to_i
       task = @tasks.slice!(task_index)
+      task.force_ignore_notification = true
       @renderer.render(:on_remove, task)
     end
 

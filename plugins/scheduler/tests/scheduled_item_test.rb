@@ -8,6 +8,11 @@ module Scheduler
       assert_equal(false, s.notify?)
     end
 
+    def test_notify_no_date_past_time_ignore_notification
+      s = Scheduler::ScheduledItem.new({time: Time.now - 1})
+      s.force_ignore_notification = true
+      assert_equal(false, s.notify?)
+    end
 
     def test_notify_no_date_past_time
       s = Scheduler::ScheduledItem.new({time: Time.now - 1})
@@ -74,7 +79,8 @@ module Scheduler
 
 
     def test_notify_past_already_notified
-      s = Scheduler::ScheduledItem.new({last_notified: Time.now, date: Date.today - 10, time: Time.now - 1})
+      s = Scheduler::ScheduledItem.new({date: Date.today - 10, time: Time.now - 1})
+      s.last_notified = Time.now
       assert_equal(false, s.notify?)
     end
 
