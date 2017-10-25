@@ -20,22 +20,22 @@ I plan on adding many modules and features to it, but the initial rollout will i
 # Run
 `foreman run ruby ./core/bootstrap.rb`
 
-```shell
+```
+Loaded Help::Plugin
+Loaded Jokes::Plugin
+Loaded Notifier::Plugin
+Loaded Scheduler::Plugin
 Hi, I'm your personal assistant. Type 'help me' to see what I can do!
-> help
-Ask me to remember something and I will.
-eg. 'Go to the movies at 2pm tomorrow.'
-
-Type 'list' to see everything I'm remembering at the moment.
-Type 'exit' to quit.
 > Go to the movies at 2pm tomorrow.
------ Great! I'll remind you about this on 2017-10-22 at 2:00 pm.
-> Interview on 10/14 at 1pm
------ Great! I'll remind you about this on 2017-10-14 at 1:00 pm.
+----- Great! I'll remind you to `Go to the movies .` on 2017-10-26 at 2:00 pm.
+> tell me a joke
+----- Why is Peter Pan always flying? Because he Neverlands.
+> Call friend in 5 minutes
+----- Great! I'll remind you to `Call friend` on 2017-10-27 at 11:33 am.
 > list
 ----- Your list..
 ----- * Go to the movies at 2pm tomorrow.
------ * Interview on 10/14 at 1pm
+----- * Call friend in 5 minutes
 ```
 
 # Run tests
