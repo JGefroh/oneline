@@ -28,6 +28,17 @@ module Scheduler
       assert_equal("thu", data[:day])
     end
 
+    def test_parse_day_partial_first
+      data = @@parser.parse("Go sightseeing with friend on thursday.")
+      assert_equal("thursday", data[:day])
+    end
+
+    def test_parse_day_partial_middle
+      data = @@parser.parse("Go to a wedding on thursday with friend.")
+      assert_equal("thursday", data[:day])
+    end
+
+
     def test_parse_date
       data = @@parser.parse("Go to the zoo 3/13")
       assert_equal("3/13", data[:date])
@@ -134,29 +145,66 @@ module Scheduler
       assert_equal('monday', @@parser.send(:identify_field, :day, "wash clothes on monday")[:day])
     end
 
+    def test_day_mon_end
+      assert_equal('mon', @@parser.send(:identify_field, :day, "wash clothes on mon")[:day])
+    end
+
     def test_day_tuesday
       assert_equal('tuesday', @@parser.send(:identify_field, :day, "feed turtles on tuesday")[:day])
+    end
+
+    def test_day_tue_end
+      assert_equal('tue', @@parser.send(:identify_field, :day, "feed turtles on tue")[:day])
     end
 
     def test_day_wednesday
       assert_equal('wednesday', @@parser.send(:identify_field, :day, "go to the bank on wednesday")[:day])
     end
 
+    def test_day_wed_end
+      assert_equal('wed', @@parser.send(:identify_field, :day, "go to the bank on wed")[:day])
+    end
+
     def test_day_thursday
       assert_equal('thursday', @@parser.send(:identify_field, :day, "interview with company on thursday")[:day])
+    end
+
+    def test_day_thursday_end
+      assert_equal('thu', @@parser.send(:identify_field, :day, "interview with company on thu")[:day])
     end
 
     def test_day_friday
       assert_equal('friday', @@parser.send(:identify_field, :day, "deploy system on friday")[:day])
     end
 
+    def test_day_fri_end
+      assert_equal('fri', @@parser.send(:identify_field, :day, "deploy system on fri")[:day])
+    end
+
     def test_day_saturday
       assert_equal('saturday', @@parser.send(:identify_field, :day, "go hiking on saturday")[:day])
+    end
+
+    def test_day_sat_end
+      assert_equal('sat', @@parser.send(:identify_field, :day, "go hiking on sat")[:day])
+    end
+
+    def test_day_sat_start
+      assert_equal('sat', @@parser.send(:identify_field, :day, "sat go hiking")[:day])
     end
 
     def test_day_sunday
       assert_equal('sunday', @@parser.send(:identify_field, :day, "relax on sunday")[:day])
     end
+
+    def test_day_sun_end
+      assert_equal('sun', @@parser.send(:identify_field, :day, "relax on sun")[:day])
+    end
+
+    def test_day_sun_start
+      assert_equal('sun', @@parser.send(:identify_field, :day, "sun relax")[:day])
+    end
+
 
 
     def test_date_shorthand
