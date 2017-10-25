@@ -1,9 +1,11 @@
 require "test/unit"
 require_relative '../processor'
+require_relative 'mocks/mock_console_renderer'
 module Scheduler
   class ProcessorTest < Test::Unit::TestCase
     def setup
       @processor = Scheduler::Processor.new
+      @processor.renderer = Scheduler::MockConsoleRenderer.new
     end
 
     def test_process_tasks_add
