@@ -3,9 +3,10 @@
 1line is a personal assistant chatbot intended to simplify my life.
 
 ### Features:
-* Schedule tasks
+* Schedules tasks and sends you reminders
+* Tells you jokes!
 * Receive SMS / Text message notifications
-* Modular plugin architecture
+* Modular plugin architecture makes extensions easy!
 
 
 # Future Plans
