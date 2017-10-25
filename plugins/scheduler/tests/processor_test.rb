@@ -34,10 +34,15 @@ module Scheduler
 
     def test_remove_task
       assert_equal(0, @processor.tasks.length)
+      @processor.send(:add_task, {label: 'task 0', date: Date.today, interpreted: true, command: 'add'})
       @processor.send(:add_task, {label: 'task 1', date: Date.today, interpreted: true, command: 'add'})
-      assert_equal(1, @processor.tasks.length)
-      @processor.send(:remove_task, {command: 'remove', remove_index: 0, interpreted: true})
-      assert_equal(0, @processor.tasks.length)
+      @processor.send(:add_task, {label: 'task 2', date: Date.today, interpreted: true, command: 'add'})
+      @processor.send(:add_task, {label: 'task 3', date: Date.today, interpreted: true, command: 'add'})
+      @processor.send(:add_task, {label: 'task 4', date: Date.today, interpreted: true, command: 'add'})
+      assert_equal(5, @processor.tasks.length)
+      removed_task = @processor.send(:remove_task, {command: 'remove', remove_index: 2, interpreted: true})
+      assert_equal(4, @processor.tasks.length)
+      assert_equal(removed_task.label, 'task 2')
     end
   end
 end
