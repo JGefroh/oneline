@@ -7,11 +7,10 @@ module OneLine
     end
 
     def process?(data)
-      raise 'unimplemented'
+      return false
     end
 
     def process(data)
-      raise 'unimplemented'
     end
   end
 end
