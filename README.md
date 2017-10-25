@@ -1,6 +1,12 @@
 # 1line
 
-1line is a personal assistant application I am writing to simplify my life.
+1line is a personal assistant chatbot intended to simplify my life.
+
+### Features:
+* Schedule tasks
+* Receive SMS / Text message notifications
+
+# Future Plans
 
 I plan on adding many modules and features to it, but the initial rollout will include a basic scheduling and notification service to help me remember appointments and to-do-lists.
 
