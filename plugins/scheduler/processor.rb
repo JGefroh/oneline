@@ -2,11 +2,9 @@ require_relative 'parser'
 require_relative 'interpreter'
 require_relative 'console_renderer'
 require_relative 'scheduled_item'
-require_relative '../core/processor'
 
 module Scheduler
   class Processor
-    include OneLine::Processor
     attr_accessor :tasks
     attr_accessor :renderer
     attr_accessor :parser

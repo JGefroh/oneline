@@ -9,7 +9,6 @@ module Notifier
     attr_accessor :notifier
 
     def initialize(queue)
-      puts "I'll notify you about upcoming events."
       @queue = queue
       @notifier = Notifier::AwsSmsNotifier.new()
     end
@@ -19,13 +18,14 @@ module Notifier
       Thread.new do
         loop do
           process()
-          sleep 10
+          sleep 3
         end
       end
     end
 
     def process
       @queue.each{|item|
+        puts item
         if item.notify?
           @notifier.notify(ENV['PHONE_NUMBER'], item.original_text)
           item.last_notified = Time.now

@@ -1,4 +1,4 @@
-require_relative '../notifier/notifiable'
+require './plugins/notifier/notifiable'
 require 'date'
 require 'time'
 module Scheduler

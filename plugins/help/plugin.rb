@@ -1,8 +1,17 @@
-require_relative '../core/processor'
-
+require './core/plugin'
+require './core/store'
 module Help
-  class Processor
-    include OneLine::Processor
+  class Plugin
+    include OneLine::Plugin
+
+    def initialize
+      load(self)
+    end
+
+    def load(plugin)
+      super(plugin)
+    end
+
     def process(text)
       print_help()
     end
@@ -20,3 +29,4 @@ module Help
     end
   end
 end
+Help::Plugin.new
