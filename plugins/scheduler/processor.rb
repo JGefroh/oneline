@@ -19,8 +19,20 @@ module Scheduler
 
     def process(text)
       @renderer.render(:on_list_request, @tasks) and return if text.chomp === 'list'
-      return remove_task(text) unless text.scan(/^(remove \d+)$/i).empty?
 
+      unless text.scan(/^(remove \d+)$/i).empty?
+        task = remove_task(text)
+        @renderer.render(:on_remove, task)
+        return task
+      end
+
+      task = add_task(text)
+      @renderer.render(:on_create, task)
+
+      return task
+    end
+
+    private def add_task(text)
       parsed_text = parser.parse(text)
       interpreted_data = interpreter.interpret(parsed_text)
       interpreted_data[:original_text] = text
@@ -28,7 +40,6 @@ module Scheduler
       if interpreted_data[:interpreted]
         item = to_scheduled_item(interpreted_data)
         @tasks << item
-        @renderer.render(:on_create, item)
       end
 
       return item
@@ -39,7 +50,7 @@ module Scheduler
       task = @tasks.slice!(task_index)
       return unless task
       task.force_ignore_notification = true
-      @renderer.render(:on_remove, task)
+      return task
     end
 
     def process?(text)
