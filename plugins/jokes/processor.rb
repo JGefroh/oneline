@@ -16,9 +16,10 @@ module Jokes
       category = :dad
       category = :chucknorris if text.include?('chuck norris')
 
-      joke = @gateways[category].get_joke()
+      joke = @gateways[category].get_joke() rescue nil
 
-      @renderer.render(joke)
+      @renderer.render(joke) if joke
+      @renderer.render_message("The only joke I could think of is my own ability to tell them. :(") unless joke
     end
 
     def process?(text)
