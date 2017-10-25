@@ -3,7 +3,7 @@ module OneLine
     def initialize
       start()
     end
-    
+
     def start
       input = ''
       puts "Hi, I'm your personal assistant. Type 'help me' to see what I can do!"
@@ -11,7 +11,13 @@ module OneLine
         print "> "
         input = gets
         input = input.strip
-        OneLine::Store.plugins.each { |plugin| plugin.process(input) if plugin.process?(input) }
+        OneLine::Store.plugins.each { |plugin|
+          begin
+           plugin.process(input) if plugin.process?(input)
+          rescue Exception => e
+            puts "Error: #{e}"
+          end
+        }
       end
     end
   end
