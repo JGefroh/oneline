@@ -1,7 +1,14 @@
 module OneLine
   class Application
     def initialize
+      initialize_interrupt_handler()
       start()
+    end
+
+    private def initialize_interrupt_handler
+      trap "SIGINT" do
+        puts "Type `exit` to quit."
+      end
     end
 
     def start
