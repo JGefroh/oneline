@@ -15,7 +15,7 @@ module OneLine
           begin
            plugin.process(input) if plugin.process?(input)
           rescue Exception => e
-            puts "Error: #{e}"
+            puts e
           end
         }
       end
