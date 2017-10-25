@@ -5,7 +5,7 @@ module Jokes
     attr_accessor :joke
 
     def initialize(params = {})
-      @joke = params['joke']
+      @joke = params['joke'] || params[:joke]
     end
   end
 end

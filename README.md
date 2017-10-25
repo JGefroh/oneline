@@ -18,9 +18,14 @@ You're a busy person with many important things to do. Why waste time rememberin
 ### Tells you jokes!
 OneLine uses the API provided by [icanhazdadjoke](https://icanhazdadjoke.com) to fetch you the very ~best~ worst dad-jokes and lame puns. It's almost as if I were telling you the jokes myself!
 
+We currently support Dad jokes and Chuck Norris jokes.
 ```
 > tell me a joke
 ----- Why is Peter Pan always flying? Because he Neverlands.
+> tell me a dad joke
+----- It doesn't matter how much you push the envelope. It will still be stationary.
+> tell me a chuck norris joke
+----- Do you know why Baskin Robbins only has 31 flavors? Because Chuck Norris doesn't like Fudge Ripple.
 ```
 
 ### Modular architecture
