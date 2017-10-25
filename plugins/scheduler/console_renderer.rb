@@ -11,8 +11,9 @@ module Scheduler
     end
 
     private def render_list(tasks)
-      puts "----- Your list..\n"
-      tasks.each{ |task| puts "----- * #{task.original_text}"}
+      puts "----- Your list:"
+      puts "----- Type `remove #` to remove an item from the list."
+      tasks.each_with_index{ |task, index| puts "#{index}: ----- * #{task.original_text}"}
     end
   end
 end
