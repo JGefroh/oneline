@@ -27,8 +27,6 @@ module Help
           value.each{|message| messages << message}
         end
       }
-
-      messages << "Type 'exit' to quit."
       return messages
     end
   end
