@@ -1,4 +1,4 @@
-module Notifier
+module Notifications
   module Notifiable
     attr_accessor :last_notified
     attr_accessor :force_ignore_notification

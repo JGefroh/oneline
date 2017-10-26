@@ -52,7 +52,7 @@ I plan on adding many modules and features to it, but the initial rollout will i
 ```
 Loaded Help::Plugin
 Loaded Jokes::Plugin
-Loaded Notifier::Plugin
+Loaded Notifications::Plugin
 Loaded Scheduler::Plugin
 Hi, I'm your personal assistant. Type 'help me' to see what I can do!
 > Go to the movies at 2pm tomorrow.

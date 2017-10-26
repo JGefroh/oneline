@@ -1,10 +1,10 @@
-require 'date'
-require 'time'
 require 'aws-sdk'
+require_relative '../notifier'
 
-module Notifier
+module Notifications
   class AwsSmsNotifier
-    def notify(target, message, type = :sms)
+    include Notifications::Notifier
+    def notify(target, message, params = {})
       aws = Aws::SNS::Client.new()
       aws.publish({
         phone_number: target,

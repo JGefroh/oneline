@@ -22,7 +22,7 @@ module Scheduler
     end
 
     private def add_to_notification_queue(item)
-      notification_queue = OneLine::Store.data["Notifier::Plugin-queue"] || []
+      notification_queue = OneLine::Store.data["Notifications::Plugin-queue"] || []
       notification_queue << item if notification_queue
     end
 

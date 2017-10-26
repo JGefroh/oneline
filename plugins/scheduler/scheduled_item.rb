@@ -1,9 +1,9 @@
-require './plugins/notifier/notifiable'
+require './plugins/notifications/notifiable'
 require 'date'
 require 'time'
 module Scheduler
   class ScheduledItem
-    include Notifier::Notifiable
+    include Notifications::Notifiable
     attr_accessor :label
     attr_accessor :date
     attr_accessor :time
