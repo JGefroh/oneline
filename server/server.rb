@@ -10,7 +10,7 @@ get '/s' do
   responses = []
   OneLine::Store.plugins.each { |key, plugin|
     begin
-      responses << plugin.call(params[:text]) if plugin.process?(params[:text])
+      responses << plugin.call(params[:text])
     rescue Exception => e
       puts e
     end

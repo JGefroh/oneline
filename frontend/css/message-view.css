@@ -1,0 +1,39 @@
+html {
+  font-family: sans-serif;
+}
+
+body {
+  width: 80%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.Message {
+  max-width: 300px;
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: 15px;
+  margin-bottom: 0.5rem;
+}
+.Message-wrapper {
+  width: 100%;
+}
+.Message-wrapper-received {
+  text-align: sent;
+}
+.Message-wrapper-sent {
+  text-align: right;
+}
+.Message-sent {
+  background-color: #3ba4ff;
+  color: #e7f3ff;
+}
+.Message-received {
+  background-color: #eff0f4;
+}
+
+input {
+  width: 100%;
+  font-size: 1.5rem;
+  padding: 0.25rem;
+}
