@@ -2,6 +2,8 @@
 
 OneLine is a personal assistant chatbot intended to simplify my life.
 
+<img width="656" alt="screen shot 2017-10-26 at 4 16 06 pm" src="https://user-images.githubusercontent.com/1077095/32081242-039a5eba-ba69-11e7-8aa3-5839c5706bd5.png">
+
 # Features:
 
 ### Track your to-do-list and receive SMS / Text message reminders
