@@ -6,29 +6,41 @@ body {
   width: 80%;
   max-width: 600px;
   margin: 0 auto;
+  position: relative;
 }
 
-.Message {
+.message-window {
+  height: 500px;
+  overflow-y: auto;
+}
+
+.message-input {
+  bottom: 0;
+  width: 100%;
+}
+
+.message {
   max-width: 300px;
   display: inline-block;
   padding: 0.5rem 1rem;
   border-radius: 15px;
   margin-bottom: 0.5rem;
 }
-.Message-wrapper {
+
+.message-wrapper {
   width: 100%;
 }
-.Message-wrapper-received {
+.message-wrapper-received {
   text-align: sent;
 }
-.Message-wrapper-sent {
+.message-wrapper-sent {
   text-align: right;
 }
-.Message-sent {
+.message-sent {
   background-color: #3ba4ff;
   color: #e7f3ff;
 }
-.Message-received {
+.message-received {
   background-color: #eff0f4;
 }
 
