@@ -13,22 +13,23 @@ module Help
     end
 
     def process(text)
-      print_help()
+      return {messages: render_help()}
     end
 
     def process?(text)
       return text === 'help' || text === 'help me'
     end
 
-    def print_help
+    def render_help
+      messages = []
       OneLine::Store.data.each{|key, value|
         if key.include?('help')
-          puts value
-          puts ""
+          value.each{|message| messages << message}
         end
       }
 
-      puts "Type 'exit' to quit."
+      messages << "Type 'exit' to quit."
+      return messages
     end
   end
 end

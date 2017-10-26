@@ -28,6 +28,10 @@ var app = new Vue({
                 sender: 'system'
               });
             }
+
+            Vue.nextTick(function () {
+              messageWindow.scrollTop = messageWindow.scrollHeight;
+            })
           }
         }).catch(function(response) {
           console.info(response);

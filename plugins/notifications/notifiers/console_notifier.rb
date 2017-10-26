@@ -4,7 +4,7 @@ module Notifications
   class ConsoleNotifier
     include Notifications::Notifier
     def notify(target, message, params = {})
-      puts "----- #{message}"
+      puts "#{message}"
     end
   end
 end
