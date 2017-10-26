@@ -13,8 +13,9 @@ module Scheduler
     end
 
     def process(data)
-      item = processor.process(data)
-      add_to_notification_queue(item) if item
+      result = processor.process(data)
+      add_to_notification_queue(result[:data]) if result && result[:data]
+      return result
     end
 
     def process?(data)

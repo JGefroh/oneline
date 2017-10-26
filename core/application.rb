@@ -20,7 +20,12 @@ module OneLine
         input = input.strip
         OneLine::Store.plugins.each { |key, plugin|
           begin
-           plugin.process(input) if plugin.process?(input)
+            plugin_response = plugin.call(input)
+            if plugin_response && plugin_response.messages
+              plugin_response.messages.each{|message|
+                puts message
+              }
+            end
           rescue Exception => e
             puts e
           end

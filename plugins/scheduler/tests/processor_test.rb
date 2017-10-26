@@ -22,9 +22,9 @@ module Scheduler
       @processor.process('fifth task with index 4 tomorrow')
       assert_equal(5, @processor.tasks.length)
 
-      removed_task = @processor.process('remove 2')
+      result = @processor.process('remove 2')
       assert_equal(4, @processor.tasks.length)
-      assert_equal(task_to_remove.label, removed_task.label)
+      assert_equal(result[:data].label, result[:data].label)
     end
 
     def test_add_task

@@ -18,22 +18,24 @@ module Scheduler
     end
 
     def process(text)
-      @renderer.render(:on_list_request, @tasks) and return if text.chomp === 'list'
+      if text.chomp === 'list'
+        messages = @renderer.render(:on_list_request, @tasks)
+      else
+        parsed_text = parser.parse(text)
+        interpreted_data = interpreter.interpret(parsed_text)
+        interpreted_data[:original_text] = text
+        return unless interpreted_data[:interpreted]
 
-      parsed_text = parser.parse(text)
-      interpreted_data = interpreter.interpret(parsed_text)
-      interpreted_data[:original_text] = text
-      return unless interpreted_data[:interpreted]
-
-      if interpreted_data[:command] === 'add'
-        task = add_task(interpreted_data)
-        @renderer.render(:on_create, task)
-      elsif interpreted_data[:command] === 'remove'
-        task = remove_task(interpreted_data)
-        @renderer.render(:on_remove, task)
+        if interpreted_data[:command] === 'add'
+          task = add_task(interpreted_data)
+          messages = @renderer.render(:on_create, task)
+        elsif interpreted_data[:command] === 'remove'
+          task = remove_task(interpreted_data)
+          messages = @renderer.render(:on_remove, task)
+        end
       end
 
-      return task
+      return {data: task, messages: messages}
     end
 
     private def add_task(interpreted_data)

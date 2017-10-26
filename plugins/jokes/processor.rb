@@ -18,8 +18,9 @@ module Jokes
 
       joke = @gateways[category].get_joke() rescue nil
 
-      @renderer.render(joke) if joke
-      @renderer.render_message("The only joke I could think of is my own ability to tell them. :(") unless joke
+      messages = @renderer.render(joke) if joke
+      messages = @renderer.render_message("The only joke I could think of is my own ability to tell them. :(") unless joke
+      return {data: joke, messages: messages}
     end
 
     def process?(text)
