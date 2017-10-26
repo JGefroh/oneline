@@ -1,7 +1,6 @@
 axios.defaults.baseURL = 'http://127.0.0.1:4567'
 var messages = [
-  {message: 'hello', sender: 'you'},
-  {message: 'hi Joseph!', sender: 'system'}
+  {message: 'Hi, I\'m OneLine. Type \'help\' to find out what I can do!', sender: 'system'}
 ]
 var app = new Vue({
   el: '#app',
