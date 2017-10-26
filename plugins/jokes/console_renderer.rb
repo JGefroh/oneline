@@ -6,7 +6,7 @@ module Jokes
     end
 
     def render_message(message)
-      return ["----- #{message}"]
+      return ["#{message}"]
     end
   end
 end

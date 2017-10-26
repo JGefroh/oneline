@@ -9,9 +9,9 @@ You're a busy person with many important things to do. Why waste time rememberin
 
 ```
 > Go to the movies at 2pm 11/13
------ Great! I'll remind you to `Go to the movies` on 2017-11-13 at 2:00 pm.
+Great! I'll remind you to `Go to the movies` on 2017-11-13 at 2:00 pm.
 > Call friend in 5 minutes
------ Great! I'll remind you to `Call friend` on 2017-10-27 at 11:33 am.
+Great! I'll remind you to `Call friend` on 2017-10-27 at 11:33 am.
 ```
 
 
@@ -21,11 +21,11 @@ OneLine will tell you the very ~best~ worst dad-jokes and lame puns. It's almost
 We currently support Dad jokes and Chuck Norris jokes.
 ```
 > tell me a joke
------ Why is Peter Pan always flying? Because he Neverlands.
+Why is Peter Pan always flying? Because he Neverlands.
 > tell me a dad joke
------ It doesn't matter how much you push the envelope. It will still be stationary.
+It doesn't matter how much you push the envelope. It will still be stationary.
 > tell me a chuck norris joke
------ Do you know why Baskin Robbins only has 31 flavors? Because Chuck Norris doesn't like Fudge Ripple.
+Do you know why Baskin Robbins only has 31 flavors? Because Chuck Norris doesn't like Fudge Ripple.
 ```
 
 Thanks to the following API providers for their jokes:
@@ -56,15 +56,15 @@ Loaded Notifications::Plugin
 Loaded Scheduler::Plugin
 Hi, I'm your personal assistant. Type 'help me' to see what I can do!
 > Go to the movies at 2pm tomorrow.
------ Great! I'll remind you to `Go to the movies .` on 2017-10-26 at 2:00 pm.
+Great! I'll remind you to `Go to the movies .` on 2017-10-26 at 2:00 pm.
 > tell me a joke
------ Why is Peter Pan always flying? Because he Neverlands.
+Why is Peter Pan always flying? Because he Neverlands.
 > Call friend in 5 minutes
------ Great! I'll remind you to `Call friend` on 2017-10-27 at 11:33 am.
+Great! I'll remind you to `Call friend` on 2017-10-27 at 11:33 am.
 > list
------ Your list..
------ * Go to the movies at 2pm tomorrow.
------ * Call friend in 5 minutes
+Your list..
+* Go to the movies at 2pm tomorrow.
+* Call friend in 5 minutes
 ```
 
 # Run tests
