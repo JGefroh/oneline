@@ -1,5 +1,4 @@
 require_relative 'notifiers/aws_sms_notifier'
-require_relative 'notifiers/osx_alert_notifier'
 require_relative 'notifiers/console_notifier'
 require 'time'
 $stdout.sync = true
@@ -14,7 +13,6 @@ module Notifications
       @queue = queue
       @notifiers = [
         Notifications::AwsSmsNotifier.new(),
-        Notifications::OsxAlertNotifier.new(),
         Notifications::ConsoleNotifier.new()
       ]
     end
