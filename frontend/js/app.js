@@ -17,7 +17,9 @@ var app = new Vue({
         });
         this.newMessage = null;
         messageWindow = this.$el.querySelector("#message-window");
-        messageWindow.scrollTop = messageWindow.scrollHeight;
+        Vue.nextTick(function () {
+          messageWindow.scrollTop = messageWindow.scrollHeight;
+        })
       }
     }
   }
