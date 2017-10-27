@@ -5,7 +5,7 @@ require 'plivo'
 before do
   if request.request_method != 'OPTIONS' && request.request_method != 'GET'
     @request_payload = request.body.read.to_s
-    @request_payload = JSON.parse(@request_payload)
+    @request_payload = JSON.parse(@request_payload) rescue nil
   end
 end
 
@@ -44,14 +44,18 @@ post '/messages' do
   return JSON.generate(result_objects)
 end
 
-post '/sms' do
+get '/sms' do
+  responses = []
+  @request_params = {"To": "18082157977", "From": "18082348376", "Text": "tell me a joke", "captures"=>[]}
+
   OneLine::Store.plugins.each { |key, plugin|
     begin
-      plugin_response = plugin.call(@request_payload['message'], {owner_id: @request_payload['owner_id']})
+      plugin_response = plugin.call(@request_params['Text'], {owner_id: @request_params['From']})
       responses << plugin_response if plugin_response
     rescue Exception => e
       puts e
     end
+
   }
   result_objects = []
   plivo = Plivo::RestAPI.new(ENV['PLIVO_AUTH_ID'], ENV['PLIVO_AUTH_TOKEN'])
@@ -62,13 +66,13 @@ post '/sms' do
   }
 
   result_objects.each{|obj|
-    puts request
     plivo.send_message({
       src: ENV['PLIVO_SOURCE_NUMBER'],
-      dst: @request_payload['from'],
+      dst: @request_params['From'],
       text: obj[:message]
     })
   }
+  return JSON.generate({})
 end
 
 load_regex = ARGV[0] === 'test' ? /test\.rb/ : /plugin\.rb/
