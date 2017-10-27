@@ -1,4 +1,5 @@
 require_relative 'notifiers/aws_sms_notifier'
+require_relative 'notifiers/plivo_notifier'
 require_relative 'notifiers/console_notifier'
 require 'time'
 $stdout.sync = true
@@ -12,7 +13,8 @@ module Notifications
     def initialize(queue)
       @queue = queue
       @notifiers = [
-        Notifications::AwsSmsNotifier.new(),
+        # Notifications::AwsSmsNotifier.new(),
+        Notifications::PlivoNotifier.new(),
         Notifications::ConsoleNotifier.new()
       ]
     end
@@ -21,7 +23,7 @@ module Notifications
       Thread.abort_on_exception = true
       Thread.new do
         loop do
-          process()
+          process() rescue nil
           sleep 3
         end
       end
@@ -30,10 +32,13 @@ module Notifications
     def process
       @queue.each{|item|
         if item.notify?
-          @notifiers.each { |notifier|
-            notifier.notify(ENV['PHONE_NUMBER'], item.label)
-            item.last_notified = Time.now
-          }
+          number = OneLine::Store.data_for(item.owner_id)['Identity::Plugin-data'][:mobile_phone_number]
+          if number
+            @notifiers.each { |notifier|
+              notifier.notify(number, item.label)
+              item.last_notified = Time.now
+            }
+          end
         end
       }
     end
