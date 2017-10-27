@@ -5,6 +5,7 @@ module OneLine
   module Server
     class IncomingWebHandler
       def handle(request)
+        return [] if request.params[:owner_id].length <= 20
         request_payload = to_json(request.body)
         return [] unless request_payload
         plugin_responses = OneLine::Plugin.call_all(request_payload['message'], {owner_id: request.params[:owner_id]})
