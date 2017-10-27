@@ -5,10 +5,10 @@ module OneLine
   module Server
     class IncomingWebHandler
       def handle(request)
-        return [] if request.params['owner_id'].length <= 20
         request_payload = to_json(request.body)
         return [] unless request_payload
-        plugin_responses = OneLine::Plugin.call_all(request_payload['message'], {owner_id: request.params['owner_id']})
+        return [] if request_payload['owner_id'].length <= 20
+        plugin_responses = OneLine::Plugin.call_all(request_payload['message'], {owner_id: request_payload['owner_id']})
         return convert_to_message_hashes(plugin_responses)
       end
 
