@@ -1,5 +1,5 @@
-require_relative './gateways/Icanhazdadjoke_gateway'
-require_relative './gateways/Icndb_gateway'
+require_relative './gateways/icanhazdadjoke_gateway'
+require_relative './gateways/icndb_gateway'
 require_relative 'console_renderer'
 require './utilities/requestor'
 
