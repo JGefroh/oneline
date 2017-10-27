@@ -4,7 +4,6 @@ if (location.href.indexOf('127.0.0.1') >= 0) {
 else {
   axios.defaults.baseURL = 'http://oneline.jgefroh.com'
 }
-
 var url = new URL(location.href);
 var owner_id = url.searchParams.get("owner_id")
 if (!owner_id) {

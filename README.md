@@ -35,7 +35,7 @@ Thanks to the following API providers for their jokes:
 * [The Internet Chuck Norris Database](http://www.icndb.com/)
 
 ### Multiple interfaces
-Want to talk to OneLine in the browser? Great! There's a front-end for that. Do you prefer the console? No problem - OneLine works perfectly well in the terminal. Want to just send texts instead? I'm working on that!
+Want to talk to OneLine in the browser? Great! There's a front-end for that. Do you prefer the console? No problem - OneLine works perfectly well in the terminal. Want to just send texts instead?
 
 ### Modular architecture
 OneLine uses a plugin architecture to make adding additional functionality easy! It'll auto-detect any plugins you create and automatically start using them.
