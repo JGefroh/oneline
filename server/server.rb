@@ -44,13 +44,13 @@ post '/messages' do
   return JSON.generate(result_objects)
 end
 
-get '/sms' do
+post '/sms' do
   responses = []
-  @request_params = {"To": "18082157977", "From": "18082348376", "Text": "tell me a joke", "captures"=>[]}
+  @request_params = params
 
   OneLine::Store.plugins.each { |key, plugin|
     begin
-      plugin_response = plugin.call(@request_params['Text'], {owner_id: @request_params['From']})
+      plugin_response = plugin.call(@request_params[:Text], {owner_id: @request_params[:From]})
       responses << plugin_response if plugin_response
     rescue Exception => e
       puts e
@@ -68,7 +68,7 @@ get '/sms' do
   result_objects.each{|obj|
     plivo.send_message({
       src: ENV['PLIVO_SOURCE_NUMBER'],
-      dst: @request_params['From'],
+      dst: @request_params[:From],
       text: obj[:message]
     })
   }
