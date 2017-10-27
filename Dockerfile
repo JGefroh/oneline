@@ -61,4 +61,4 @@ COPY Gemfile.lock /app/
 WORKDIR /app
 RUN bundle install
 COPY . /app
-CMD foreman run ruby ./server/server.rb server
+CMD foreman start
