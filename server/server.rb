@@ -27,7 +27,7 @@ post '/messages' do
   halt 500 if !result_objects || result_objects.empty?
 end
 
-get '/sms' do
+post '/sms' do
   handler = OneLine::Server::IncomingSmsHandler.new()
   successful = handler.handle(request)
   halt 200 if successful
