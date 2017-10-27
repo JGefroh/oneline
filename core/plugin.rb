@@ -7,18 +7,18 @@ module OneLine
       puts "Loaded #{plugin.class}"
     end
 
-    def call(data)
-      if process?(data)
-        result = process(data)
+    def call(data, params = {})
+      if process?(data, params)
+        result = process(data, params)
         to_response(result) if result
       end
     end
 
-    def process?(data)
+    def process?(data, params = {})
       return false
     end
 
-    def process(data)
+    def process(data, params = {})
     end
 
     def to_response(result)

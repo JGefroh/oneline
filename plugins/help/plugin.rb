@@ -12,17 +12,17 @@ module Help
       super(plugin)
     end
 
-    def process(text)
+    def process(text, params = {})
       return {messages: render_help()}
     end
 
-    def process?(text)
+    def process?(text, params = {})
       return text === 'help' || text === 'help me'
     end
 
     def render_help
       messages = []
-      OneLine::Store.data.each{|key, value|
+      OneLine::Store.global_data.each{|key, value|
         if key.include?('help')
           value.each{|message| messages << message}
         end

@@ -12,23 +12,28 @@ module Scheduler
       load(self)
     end
 
-    def process(data)
-      result = processor.process(data)
-      add_to_notification_queue(result[:data]) if result && result[:data]
+    def process(data, params = {})
+      result = processor.process(data, params[:owner_id])
+      
+      if result && result[:data]
+        result[:data].owner_id = params[:owner_id]
+        add_to_notification_queue(result[:data])
+      end
+
       return result
     end
 
-    def process?(data)
+    def process?(data, params = {})
       return processor.process?(data)
     end
 
     private def add_to_notification_queue(item)
-      notification_queue = OneLine::Store.data["Notifications::Plugin-queue"] || []
+      notification_queue = OneLine::Store.global_data["Notifications::Plugin-queue"] || []
       notification_queue << item if notification_queue
     end
 
     private def initialize_help_messages
-      OneLine::Store.data["#{self.class}-help"] = [
+      OneLine::Store.global_data["#{self.class}-help"] = [
         "I'll remember things with times or dates in them.",
         "Try typing `go to the movies in 15 minutes` or `call friend at 2:35pm`!",
         "You can type `list` to see what I've remembered for you.",
