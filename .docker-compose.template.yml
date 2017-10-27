@@ -1,0 +1,10 @@
+version: '2'
+services:
+  web:
+    build: './source/oneline'
+    ports:
+     - "4567:9001"
+    command: >
+      bash -c "foreman run bundle exec ruby ./server/server.rb server"
+    env_file:
+      - web.env
