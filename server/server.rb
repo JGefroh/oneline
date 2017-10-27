@@ -1,6 +1,7 @@
 require 'sinatra'
 require './core/loader'
 require 'json'
+require 'plivo'
 before do
   if request.request_method != 'OPTIONS' && request.request_method != 'GET'
     @request_payload = request.body.read.to_s
