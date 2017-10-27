@@ -12,9 +12,9 @@ module Scheduler
       load(self)
     end
 
-    def process(data, params = {})
-      result = processor.process(data, params[:owner_id])
-      
+    def process(text, params = {})
+      result = @processor.process(text, params[:owner_id])
+
       if result && result[:data]
         result[:data].owner_id = params[:owner_id]
         add_to_notification_queue(result[:data])
@@ -23,8 +23,8 @@ module Scheduler
       return result
     end
 
-    def process?(data, params = {})
-      return processor.process?(data)
+    def process?(text, params = {})
+      return @processor.process?(text) if text
     end
 
     private def add_to_notification_queue(item)

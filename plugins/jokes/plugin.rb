@@ -16,7 +16,7 @@ module Jokes
     end
 
     def process?(text, params = {})
-      return @processor.process?(text)
+      return @processor.process?(text) if text
     end
 
     def initialize_help_messages()

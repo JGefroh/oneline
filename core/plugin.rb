@@ -24,5 +24,20 @@ module OneLine
     def to_response(result)
       return OneLine::PluginResponse.new(result)
     end
+
+    def self.call_all(data, params = {})
+      plugin_responses = []
+
+      OneLine::Store.plugins.each { |key, plugin|
+        begin
+          plugin_response = plugin.call(data, params)
+          plugin_responses << plugin_response if plugin_response
+        rescue Exception => e
+          puts e
+        end
+      }
+
+      return plugin_responses
+    end
   end
 end

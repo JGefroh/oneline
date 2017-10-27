@@ -19,7 +19,7 @@ module Identity
     end
 
     def process?(text, params = {})
-      return text.downcase.index('my number is')
+      return text.downcase.index('my number is') if text
     end
   end
 end
