@@ -8,5 +8,11 @@ load_regex = ARGV[0] === 'test' ? /test\.rb/ : /plugin\.rb/
 OneLine::Loader.load(load_regex)
 
 # Start the app if not running tests.
-require_relative './application' unless ARGV[0]
-require './server/server' if ARGV[0] === 'server'
+unless ARGV[0]
+  require './console/console_application'
+  o = OneLine::ConsoleApplication.new
+end
+
+if ARGV[0] === 'server'
+  require './server/server'
+end

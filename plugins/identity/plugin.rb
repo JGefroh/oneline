@@ -54,7 +54,7 @@ module Identity
     end
 
     private def process_verification(text, params)
-      identity_data = OneLine::Store.data_for(owner_id)["#{self.class}-data"]
+      identity_data = OneLine::Store.data_for(params[:owner_id])["#{self.class}-data"]
       return {messages: ["You're already verified!"]} if identity_data[:verified]
       verification = text.scan(VERIFICATION_REGEX).first.split(' ')[1]
       owner_id = params[:owner_id]
