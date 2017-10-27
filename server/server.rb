@@ -2,6 +2,8 @@ require 'sinatra'
 require './core/loader'
 require 'json'
 require 'plivo'
+
+settings.public_folder= 'frontend'
 before do
   if request.request_method != 'OPTIONS' && request.request_method != 'GET'
     @request_payload = request.body.read.to_s
@@ -10,7 +12,7 @@ before do
 end
 
 get '/' do
-  'Hello world!'
+  File.read(File.join('frontend', 'index.html'))
 end
 
 options '/*' do
@@ -45,18 +47,18 @@ post '/messages' do
 end
 
 post '/sms' do
+  halt 403 if params['key'] != ENV['SMS_WEBHOOK_KEY']
   responses = []
   @request_params = params
-
   OneLine::Store.plugins.each { |key, plugin|
     begin
-      plugin_response = plugin.call(@request_params[:Text], {owner_id: @request_params[:From]})
+      plugin_response = plugin.call(params[:Text], {owner_id: params[:From]})
       responses << plugin_response if plugin_response
     rescue Exception => e
       puts e
     end
-
   }
+
   result_objects = []
   plivo = Plivo::RestAPI.new(ENV['PLIVO_AUTH_ID'], ENV['PLIVO_AUTH_TOKEN'])
   responses.each{|plugin_response|
@@ -68,11 +70,12 @@ post '/sms' do
   result_objects.each{|obj|
     plivo.send_message({
       src: ENV['PLIVO_SOURCE_NUMBER'],
-      dst: @request_params[:From],
+      dst: params[:From],
       text: obj[:message]
     })
   }
-  return JSON.generate({})
+
+  halt 200
 end
 
 load_regex = ARGV[0] === 'test' ? /test\.rb/ : /plugin\.rb/

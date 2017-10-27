@@ -9,6 +9,8 @@
   <body>
     <div id="app">
       <h1>OneLine</h1>
+      <p class="subtle">by <a href="https://jgefroh.com">Joseph Gefroh</a></p>
+      <hr>
       <section id="message-window" class="message-window">
         <div class="message-wrapper"
              v-for="message in messages"
@@ -24,7 +26,7 @@
       <section class="message-input">
         <input v-model="newMessage"
                v-on:keyup.enter="sendMessage(newMessage)" />
-        <button v-on:click="sendMessage(newMessage)">Send</button>
+        <p style="font-size: 0.8rem; text-align: right;" class="subtle">Press Enter to send</p>
       </section>
     </div>
     <script src="js/vue.js"></script>

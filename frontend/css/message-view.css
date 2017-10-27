@@ -9,6 +9,15 @@ body {
   position: relative;
 }
 
+.subtle {
+  color: #636c72;
+}
+
+hr {
+  padding: 0;
+  margin: 1rem 0;
+}
+
 .message-window {
   height: 500px;
   overflow-y: auto;
@@ -31,7 +40,7 @@ body {
   width: 100%;
 }
 .message-wrapper-received {
-  text-align: sent;
+  text-align: left;
 }
 .message-wrapper-sent {
   text-align: right;
@@ -39,6 +48,7 @@ body {
 .message-sent {
   background-color: #3ba4ff;
   color: #e7f3ff;
+  text-align: left;
 }
 .message-received {
   background-color: #eff0f4;

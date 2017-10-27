@@ -1,4 +1,3 @@
-require_relative 'notifiers/aws_sms_notifier'
 require_relative 'notifiers/plivo_notifier'
 require_relative 'notifiers/console_notifier'
 require 'time'
@@ -13,7 +12,6 @@ module Notifications
     def initialize(queue)
       @queue = queue
       @notifiers = [
-        # Notifications::AwsSmsNotifier.new(),
         Notifications::PlivoNotifier.new(),
         Notifications::ConsoleNotifier.new()
       ]
