@@ -2,7 +2,7 @@ require 'sinatra'
 require './core/loader'
 require 'json'
 before do
-  if request.request_method != 'OPTIONS'
+  if request.request_method != 'OPTIONS' && request.request_method != 'GET'
     @request_payload = request.body.read.to_s
     @request_payload = JSON.parse(@request_payload)
   end
@@ -27,7 +27,7 @@ post '/messages' do
   responses = []
   OneLine::Store.plugins.each { |key, plugin|
     begin
-      plugin_response = plugin.call(@request_payload['message'])
+      plugin_response = plugin.call(@request_payload['message'], {owner_id: @request_payload['owner_id']})
       responses << plugin_response if plugin_response
     rescue Exception => e
       puts e

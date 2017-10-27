@@ -1,4 +1,8 @@
 axios.defaults.baseURL = 'http://127.0.0.1:4567'
+
+var url = new URL(location.href);
+var owner_id = url.searchParams.get("owner_id") || Math.random();
+
 var messages = [
   {message: 'Hi, I\'m OneLine. Type \'help\' to find out what I can do!', sender: 'system'}
 ]
@@ -18,7 +22,8 @@ var app = new Vue({
         this.newMessage = null;
         messageWindow = this.$el.querySelector("#message-window");
         axios.post('/messages', {
-          message: message
+          message: message,
+          owner_id: owner_id
         }).then(function(response) {
           if (response.data) {
             for (var i = 0; i < response.data.length; i++) {
