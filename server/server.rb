@@ -21,11 +21,10 @@ end
 post '/messages' do
   response.headers['Access-Control-Allow-Origin'] = '*'
   response.headers["Access-Control-Allow-Headers"] = "X-Requested-With, X-HTTP-Method-Override, Content-Type, Cache-Control, Accept"
-
   handler = OneLine::Server::IncomingWebHandler.new()
   result_objects = handler.handle(request)
   return JSON.generate(result_objects) if result_objects && !result_objects.empty?
-  halt 500 if unsuccessful
+  halt 500 if !result_objects || result_objects.empty?
 end
 
 get '/sms' do

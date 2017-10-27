@@ -30,8 +30,9 @@ module Notifications
     def process
       @queue.each{|item|
         if item.notify?
-          number = OneLine::Store.data_for(item.owner_id)['Identity::Plugin-data'][:mobile_phone_number]
-          if number
+          owner = OneLine::Store.data_for(item.owner_id)['Identity::Plugin-data']
+          number = owner[:mobile_phone_number]
+          if number && owner[:verified]
             @notifiers.each { |notifier|
               notifier.notify(number, item.label)
               item.last_notified = Time.now

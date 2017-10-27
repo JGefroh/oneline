@@ -7,10 +7,8 @@ if (!owner_id) {
 }
 
 var messages = [
-  {message: 'Hi, I\'m OneLine. Enter \'help\' to find out what I can do!', sender: 'system'},
-  {message: 'Enter an 11-digit mobile phone number without any symbols or spaces to receive text reminders. For example:', sender: 'system'},
-  {message: '18085551234', sender: 'system'},
-  {message: 'Alternatively, you can text me at 1-808-215-7977.', sender: 'system'}
+  {message: 'Hi, I\'m OneLine. What\'s your phone number?', sender: 'system'},
+  {message: '(Enter an 11-digit phone number, without spaces or symbols.)', sender: 'system'}
 ]
 var app = new Vue({
   el: '#app',
