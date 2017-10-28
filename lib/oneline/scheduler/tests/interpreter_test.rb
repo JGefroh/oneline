@@ -56,7 +56,7 @@ module Scheduler
         relative_time: '15min'
       }
       data = @@interpreter.interpret(parsed_data)
-      assert_equal((Time.now + (15 * 60)).to_i, data[:time].to_i)
+      assert_equal((Time.current + (15 * 60)).to_i, data[:time].to_i)
       assert_equal(true, data[:interpreted])
     end
 
@@ -152,22 +152,22 @@ module Scheduler
 
     def test_relative_time_seconds
       time = @@interpreter.send(:set_time_from_relative_time, '3 seconds')
-      assert_equal((Time.now + 3).to_i, time.to_i)
+      assert_equal((Time.current + 3).to_i, time.to_i)
     end
 
     def test_relative_time_minutes
       time = @@interpreter.send(:set_time_from_relative_time, '10 minutes')
-      assert_equal((Time.now + (10 * 60)).to_i, time.to_i)
+      assert_equal((Time.current + (10 * 60)).to_i, time.to_i)
     end
 
     def test_relative_time_hours
       time = @@interpreter.send(:set_time_from_relative_time, '20 hours')
-      assert_equal((Time.now + (20 * 60 * 60)).to_i, time.to_i)
+      assert_equal((Time.current + (20 * 60 * 60)).to_i, time.to_i)
     end
 
     def test_relative_time_unit_different
       time = @@interpreter.send(:set_time_from_relative_time, '20 minutes')
-      assert_not_equal((Time.now + (20 * 60 * 60)).to_i, time.to_i)
+      assert_not_equal((Time.current + (20 * 60 * 60)).to_i, time.to_i)
     end
   end
 end

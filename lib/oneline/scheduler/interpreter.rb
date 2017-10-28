@@ -54,7 +54,7 @@ module Scheduler
         time_number = time_number * 60 * 60
       end
 
-      return Time.now + time_number
+      return Time.current + time_number
     end
   end
 end
