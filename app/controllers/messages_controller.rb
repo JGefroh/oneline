@@ -6,7 +6,7 @@ class MessagesController < ApplicationController
   end
 
   def sms
-    handler = Server::IncomingWebHandler.new()
+    handler = Server::IncomingSmsHandler.new()
     responses = handler.handle(params)
     render json: {}
   end
