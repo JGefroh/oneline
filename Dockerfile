@@ -12,7 +12,6 @@ RUN apk add --update \
     wget \
     zlib-dev
 
-# Timezone set to Honolulu
 RUN apk add --update \
     tzdata
 
