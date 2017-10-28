@@ -34,8 +34,13 @@ Thanks to the following API providers for their jokes:
 * [icanhazdadjoke](https://icanhazdadjoke.com)
 * [The Internet Chuck Norris Database](http://www.icndb.com/)
 
-### Multiple interfaces
-Want to talk to OneLine in the browser? Great! There's a front-end for that. Do you prefer the console? No problem - OneLine works perfectly well in the terminal. Want to just send texts instead? No problem! You can use it entirely through text messages / SMS.
+
+### SMS / Text Interface
+Want to just send texts instead of using the web app? No problem! You can use it entirely through text messages / SMS.
+
+![image_uploaded_from_ios_720](https://user-images.githubusercontent.com/1077095/32137937-a2685102-bbde-11e7-94aa-dda75ce8678f.png)
+
+
 
 ### Modular architecture
 OneLine uses a plugin architecture to make adding additional functionality easy! It'll auto-detect any plugins you create and automatically start using them.
