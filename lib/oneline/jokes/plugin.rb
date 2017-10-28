@@ -4,7 +4,6 @@ module Jokes
 
     def initialize
       @processor = Jokes::Processor.new
-      puts 'hello'
       load(self)
     end
 

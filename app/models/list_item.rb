@@ -1,5 +1,6 @@
 class ListItem < ApplicationRecord
   include Notifications::Notifiable
+
   alias_attribute :notify_at_date, :date
   alias_attribute :notify_at_time, :time
 

@@ -44,7 +44,7 @@ module Scheduler
       time = item.time || Time.now
       run_at = DateTime.parse(date.to_s + " " + time.to_s) if item.date && item.time
 
-      SendReminderJob.set(wait_until: DateTime.now).perform_later(id: item.id)
+      SendReminderJob.set(wait_until: run_at).perform_later(id: item.id)
 
       return item
     end

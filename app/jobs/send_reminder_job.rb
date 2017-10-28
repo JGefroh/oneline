@@ -14,6 +14,7 @@ class SendReminderJob < ApplicationJob
       @notifiers.each { |notifier|
         notifier.notify(list_item.user.mobile_phone_number, list_item.label)
       }
+      list_item.update(notified_at: DateTime.now)
     end
   end
 end
