@@ -4,4 +4,10 @@ class MessagesController < ApplicationController
     responses = handler.handle(params)
     render json: responses
   end
+
+  def sms
+    handler = Server::IncomingWebHandler.new()
+    responses = handler.handle(params)
+    render json: {}
+  end
 end
