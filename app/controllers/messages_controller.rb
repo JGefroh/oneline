@@ -2,7 +2,7 @@ class MessagesController < ApplicationController
   around_action :set_time_zone
 
   def set_time_zone
-    owner_id = params[:owner_id] || payload[:From] || payload['From']
+    owner_id = params[:owner_id] || params[:From] || params['From']
     if !owner_id.nil? && owner_id.length > 0
       user_time_zone = User.find_or_create_by(user_identifier: owner_id).time_zone
       user_time_zone = Time.zone unless ActiveSupport::TimeZone[user_time_zone].present?
