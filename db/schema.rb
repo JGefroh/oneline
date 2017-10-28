@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171028035917) do
+ActiveRecord::Schema.define(version: 20171028142315) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 20171028035917) do
     t.string "mobile_phone_number"
     t.boolean "mobile_phone_number_verified", default: false, null: false
     t.string "verification_code"
+    t.string "time_zone", default: "UTC", null: false
   end
 
 end
