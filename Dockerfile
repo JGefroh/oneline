@@ -14,8 +14,7 @@ RUN apk add --update \
 
 # Timezone set to Honolulu
 RUN apk add --update \
-    tzdata \
-&&  cp /usr/share/zoneinfo/Pacific/Honolulu /etc/localtime
+    tzdata
 
 ENV PATH /usr/local/rbenv/shims:/usr/local/rbenv/bin:$PATH
 ENV RBENV_ROOT /usr/local/rbenv
