@@ -1,4 +1,5 @@
 require 'date'
+require 'time'
 require "test/unit"
 require_relative '../interpreter'
 module Scheduler
