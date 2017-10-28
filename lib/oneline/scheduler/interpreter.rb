@@ -30,7 +30,7 @@ module Scheduler
     end
 
     private def set_time_from_time(parsed_time)
-      return Time.parse(parsed_time)
+      return Time.zone.parse(parsed_time)
     end
 
     private def set_date_from_relative_day(parsed_relative_day)

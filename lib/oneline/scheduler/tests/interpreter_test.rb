@@ -100,7 +100,7 @@ module Scheduler
 
     def test_interpret_time_full
       time = @@interpreter.send(:set_time_from_time, "4:00am")
-      expected_time = Time.parse('4:00am')
+      expected_time = Time.zone.parse('4:00am')
       assert_equal(expected_time.hour, time.hour)
       assert_equal(expected_time.min, time.min)
       assert_equal(expected_time.sec, time.sec)
@@ -108,7 +108,7 @@ module Scheduler
 
     def test_interpret_time_short
       time = @@interpreter.send(:set_time_from_time, "6am")
-      expected_time = Time.parse('6:00am')
+      expected_time = Time.zone.parse('6:00am')
       assert_equal(expected_time.hour, time.hour)
       assert_equal(expected_time.min, time.min)
       assert_equal(expected_time.sec, time.sec)
