@@ -2,7 +2,7 @@ module Identity
   class Processor
     VERIFICATION_REGEX = /^verify \d{5}$/i
     PHONE_NUMBER_REGEX = /^\d{11}$/i
-    TIME_ZONE_REGEX = /((timezone|tz|time zone) is .+$)/i
+    TIME_ZONE_REGEX = /((timezone|tz|time zone) is (.+$))/i
 
     def process(text, params = {})
       begin
@@ -25,7 +25,7 @@ module Identity
       return !text.scan(VERIFICATION_REGEX).empty?
     end
     private def time_zone?(text)
-      return !text.scan(TIME_ZINE_REGEX)
+      return !text.scan(TIME_ZONE_REGEX).empty?
     end
 
     private def process_phone_number(text, params)
@@ -53,9 +53,11 @@ module Identity
       return {messages: ["Sorry, that's not the verification code I sent you."]} unless user.mobile_phone_number_verified
     end
 
-    private def process_time_zone?(text, params)
+    private def process_time_zone_change(text, params)
       user = User.find_or_create_by(user_identifier: params[:owner_id])
-      user.update(time_zone: timezone || 'UTC')
+      time_zone = text.scan(TIME_ZONE_REGEX).last.last
+      user.update(time_zone: time_zone || Time.zone)
+      return {messages: ["I've set your time zone to #{time_zone}."]}
     end
   end
 end
