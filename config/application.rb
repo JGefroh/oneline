@@ -16,5 +16,7 @@ module Oneline
     # -- all .rb files in that directory are automatically loaded.
     config.autoload_paths << Rails.root.join('lib/oneline')
     config.active_job.queue_adapter = :delayed_job
+    config.time_zone = 'UTC'
+    config.active_record.default_timezone = :utc # Or :utc
   end
 end
