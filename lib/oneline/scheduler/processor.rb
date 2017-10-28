@@ -4,17 +4,15 @@ module Scheduler
     attr_accessor :parser
     attr_accessor :interpreter
 
-    def initialize(tasks = {})
+    def initialize(list_items = {})
       @parser = Scheduler::Parser.new
-      @renderer = Scheduler::ConsoleRenderer.new
+      @renderer = Scheduler::TextRenderer.new
       @interpreter = Scheduler::Interpreter.new
-      @tasks = tasks
     end
 
     def process(text, owner_id)
-      @tasks[owner_id] ||= []
       if text.chomp === 'list'
-        messages = @renderer.render(:on_list_request, @tasks[owner_id])
+        messages = @renderer.render(:on_list_request, ListItem.where(user_identifier: owner_id).order(created_at: :desc))
       else
         parsed_text = parser.parse(text)
         interpreted_data = interpreter.interpret(parsed_text)
@@ -22,46 +20,48 @@ module Scheduler
         return unless interpreted_data[:interpreted]
 
         if interpreted_data[:command] === 'add'
-          task = add_task(interpreted_data, owner_id)
-          messages = @renderer.render(:on_create, task)
+          list_item = add_list_item(interpreted_data, owner_id)
+          messages = @renderer.render(:on_create, list_item)
         elsif interpreted_data[:command] === 'remove'
-          task = remove_task(interpreted_data, owner_id)
-          messages = @renderer.render(:on_remove, task)
+          list_item = remove_list_item(interpreted_data, owner_id)
+          messages = @renderer.render(:on_remove, list_item)
         end
       end
 
-      task.owner_id = owner_id if task
-
-      return {data: task, messages: messages}
+      return {data: list_item, messages: messages}
     end
 
-    private def add_task(interpreted_data, owner_id)
-      @tasks[owner_id] ||= []
-      item = to_scheduled_item(interpreted_data)
-      @tasks[owner_id] << item
+    private def add_list_item(interpreted_data, owner_id)
+      item = ListItem.create(
+        label: interpreted_data[:label],
+        original_text: interpreted_data[:original_text],
+        date: interpreted_data[:date],
+        time: interpreted_data[:time],
+        user_identifier: owner_id
+      )
+
+      date = item.date || Date.today
+      time = item.time || Time.now
+      run_at = DateTime.parse(date.to_s + " " + time.to_s) if item.date && item.time
+
+      SendReminderJob.set(wait_until: DateTime.now).perform_later(id: item.id)
+
       return item
     end
 
-    private def remove_task(interpreted_data, owner_id)
-      @tasks[owner_id] ||= []
+    private def remove_list_item(interpreted_data, owner_id)
       return if interpreted_data[:remove_index].nil?
-      task = @tasks[owner_id].slice!(interpreted_data[:remove_index])
-      return unless task
-      task.force_ignore_notification = true
-      return task
+      list_item = ListItem.where(user_identifier: owner_id).order(created_at: :desc)[interpreted_data[:remove_index]]
+      list_item.destroy
+      return list_item
     end
 
     def process?(text)
       return true
     end
 
-    def tasks_for(owner_id)
-      return @tasks[owner_id] || []
-    end
-
-    def to_scheduled_item(interpreted_data)
-      s = Scheduler::ScheduledItem.new(interpreted_data)
-      return s
+    def list_items_for(owner_id)
+      return @list_items[owner_id] || []
     end
   end
 end

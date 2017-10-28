@@ -1,5 +1,5 @@
 module Scheduler
-  class ConsoleRenderer
+  class TextRenderer
     def render(command, data = nil)
       return if data.nil?
       return render_list(data) if command === :on_list_request
