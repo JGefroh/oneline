@@ -15,7 +15,7 @@ module Scheduler
         "Your list:",
         "Type `remove #` to remove an item from the list."
       ]
-      tasks.each_with_index{ |task, index| messages << "#{index}: (#{task.time.strftime('%l:%M %P %Z').strip}) \n\n#{task.original_text}"}
+      tasks.each_with_index{ |task, index| messages << "#{index}: (#{task.date ? task.date : ''}:#{task.time ? task.time.strftime('%l:%M %P %Z').strip : ''}) \n\n#{task.original_text}"}
       return messages
     end
 
