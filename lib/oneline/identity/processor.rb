@@ -3,6 +3,22 @@ module Identity
     VERIFICATION_REGEX = /^verify \d{5}$/i
     PHONE_NUMBER_REGEX = /^\d{11}$/i
     TIME_ZONE_REGEX = /((timezone|tz|time zone) is (.+$))/i
+    TIME_ZONE_MAP = {
+      AKST: 'Alaska',
+      AKDT: 'Alaska',
+      AST: 'Atlantic Time (Canada)',
+      ADT: 'Atlantic Time (Canada)',
+      EST: 'Eastern Time (US & Canada)',
+      EDT: 'Eastern Time (US & Canada)',
+      CST: 'Central Time (US & Canada)',
+      CDT: 'Central Time (US & Canada)',
+      HST: 'Hawaii',
+      HDT: 'Hawaii',
+      MST: 'Mountain Time (US & Canada)',
+      MDT: 'Mountain Time (US & Canada)',
+      PST: 'Pacific Time (US & Canada)',
+      PDT: 'Pacific Time (US & Canada)'
+    }
 
     def process(text, params = {})
       begin
@@ -56,8 +72,14 @@ module Identity
     private def process_time_zone_change(text, params)
       user = User.find_or_create_by(user_identifier: params[:owner_id])
       time_zone = text.scan(TIME_ZONE_REGEX).last.last
-      user.update(time_zone: time_zone || Time.zone)
-      return {messages: ["I've set your time zone to #{time_zone}."]}
+      zone = ActiveSupport::TimeZone[time_zone].name unless ActiveSupport::TimeZone[time_zone].nil?
+      zone = ActiveSupport::TimeZone[TIME_ZONE_MAP[time_zone.upcase.to_sym]].name unless zone || TIME_ZONE_MAP[time_zone.upcase.to_sym].nil?
+      if zone
+        user.update(time_zone: zone)
+        return {messages: ["I've set your time zone to #{zone}."]}
+      else
+        return {messages: ["Sorry, I didn't recognize #{time_zone} as a valid time zone."]}
+      end
     end
   end
 end
