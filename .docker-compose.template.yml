@@ -1,10 +1,22 @@
 version: '2'
 services:
   web:
+    depends_on:
+     - db
     build: './source/oneline'
     ports:
-     - "4567:9001"
+     - "5001:9001"
     command: >
-      bash -c "foreman run bundle exec ruby ./server/server.rb server"
+      bash -c "rm -f tmp/pids/server.pid &&
+               bundle exec rake db:migrate &&
+               foreman start"
     env_file:
-      - web.env
+     - web.env
+  db:
+    image: postgres
+    volumes:
+      - ./mounts/db_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: <PG_USER>
+      POSTGRES_PASSWORD: <PG_PASSWORD>
+      POSTGRES_DB: oneline_prod
