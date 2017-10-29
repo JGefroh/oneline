@@ -41,7 +41,9 @@ module Scheduler
       )
       date = item.date || Date.today
       time = item.time || Time.current
-      run_at = DateTime.parse(date.to_s + " " + time.to_s)
+      time -= 1.hour unless time.isdst
+      run_at = Time.parse(date.to_s + ' ' + time.to_s).in_time_zone(Time.zone)
+
       SendReminderJob.set(wait_until: run_at).perform_later(id: item.id)
 
       return item
