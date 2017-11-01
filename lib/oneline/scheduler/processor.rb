@@ -39,12 +39,8 @@ module Scheduler
         time: interpreted_data[:time],
         user_identifier: owner_id
       )
-      date = item.date || Date.today
-      time = item.time || Time.current
-      time -= 1.hour unless time.isdst
-      run_at = Time.parse(date.to_s + ' ' + time.to_s).in_time_zone(Time.zone)
 
-      SendReminderJob.set(wait_until: run_at).perform_later(id: item.id)
+      SendReminderJob.set(wait_until: item.calculate_run_at).perform_later(id: item.id)
 
       return item
     end
