@@ -5,6 +5,8 @@ module Scheduler
       return render_list(data) if command === :on_list_request
       return render_remove_message(data) if command === :on_remove
       task = data
+      return ["I've added `#{task.label}` to your `list`. I can't remind you unless you tell me your phone number."] unless task.user.mobile_phone_number_verified
+
       return ["Great! I'll remind you to `#{task.label}` on #{task.date} at #{task.time.strftime('%l:%M %P %Z').strip}."] if !task.date.nil? && !task.time.nil?
       return ["Great! I'll remind you to `#{task.label}` on #{task.date} ."] if !task.date.nil? && task.time.nil?
       return ["Great! I'll remind you to `#{task.label}` today at #{task.time.strftime('%l:%M %P %Z').strip}."] if task.date.nil? && !task.time.nil?
