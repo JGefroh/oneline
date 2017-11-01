@@ -17,7 +17,7 @@ class InterpreterTest < ActiveSupport::TestCase
       time: '12pm',
     }
     data = @interpreter.interpret(parsed_data)
-    assert_equal(Time.parse("12:00pm"), data[:time])
+    assert_equal(Time.zone.parse("12:00pm"), data[:time])
     assert_equal(true, data[:interpreted])
   end
 
