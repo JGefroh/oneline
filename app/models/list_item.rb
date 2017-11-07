@@ -7,8 +7,10 @@ class ListItem < ApplicationRecord
   def calculate_run_at
     run_at_date = date || Date.today
     run_at_time = time || Time.current
-    run_at_time -= 1.hour unless run_at_time.dst?
     run_at = Time.parse(run_at_date.to_s + ' ' + run_at_time.to_s).in_time_zone(Time.zone)
+    puts "Now: #{Time.current}"
+    puts "DST?: #{run_at_time.dst?}"
+    puts "Run at: #{run_at}"
     return run_at
   end
 
